@@ -5,4 +5,10 @@ const nextConfig = {
     domains: ['lens.infura-ipfs.io'],
 },
 }
-module.exports = nextConfig
+module.exports = {
+  experimental: { appDir: true },
+  webpack(config) {
+    config.experiments = { ...config.experiments, topLevelAwait: true }
+    return nextConfig
+  },
+}
