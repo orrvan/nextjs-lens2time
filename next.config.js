@@ -6,9 +6,8 @@ const nextConfig = {
 },
 }
 module.exports = {
-  experimental: { appDir: true },
-  webpack(config) {
-    config.experiments = { ...config.experiments, topLevelAwait: true }
+  webpack(nextConfig) {
+    nextConfig.experiments = { ...nextConfig.experiments, topLevelAwait: true }
     return nextConfig
   },
 }
