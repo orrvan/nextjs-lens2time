@@ -67,25 +67,27 @@ function Header({headerProps}){
       console.log(searchData.data.length)
       // console.log()
       if(searchData.data.length>0){
-        console.log('找到了用户')
-        let data = JSON.parse(searchData.data[0].data)
-        if(data.brochures.length>0){
-          console.log('用户有已创建的册子,现在将用户的册子展示在我们网站中')
-          let temArr=[].concat(data.brochures)
-          headerProps.setMyBrochures(temArr)
-          headerProps.setbodyBCollectionBlankFlag(false)
+        if(searchData.data.length>0){
+          console.log('找到了用户')
+          let data = JSON.parse(searchData.data[0].data)
+          if(data.brochures.length>0){
+            console.log('用户有已创建的册子,现在将用户的册子展示在我们网站中')
+            let temArr=[].concat(data.brochures)
+            headerProps.setMyBrochures(temArr)
+            headerProps.setbodyBCollectionBlankFlag(false)
+          }else{
+            console.log('用户现在还没有册子')
+          }
         }else{
-          console.log('用户现在还没有册子')
+          let value =JSON.stringify({
+          brochures:[]})
+          headerProps.setLoadingFlag(true)
+          headerProps.createUser(user,value)
+          // window.localStorage.setItem(user,value)
+          console.log('已新建用户')
         }
-
-      }else{
-        let value =JSON.stringify({
-        brochures:[]})
-        headerProps.setLoadingFlag(true)
-        headerProps.createUser(user,value)
-        // window.localStorage.setItem(user,value)
-        console.log('已新建用户')
       }
+
       /************获取个人在我们服务器上的信息 关 *******************************/
     } catch (err) {
       console.log({ err })
