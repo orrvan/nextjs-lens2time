@@ -406,10 +406,14 @@
   min-width: 16px;
   min-height: 16px;
   height: 0.5715rem;
-  font-size: 0.5714rem;
-  background-color: rgba(0, 0, 0, 0.01);
-  text-align: right;
-  line-height: 16px;
+  background-image: url(../public/cancelBlack.png); 
+  background-repeat: no-repeat;
+  /* background-size:contain; */
+  background-size:cover;
+  /* font-size: 0.5714rem; */
+  /* background-color: rgba(0, 0, 0, 0.01); */
+  /* text-align: right;
+  line-height: 16px; */
 }
 .part1_name p{
   color: rgba(16, 16, 16, 1);
@@ -436,7 +440,7 @@
   left: 0.5rem;
 }
 .collectionView_part2{
-  height: 0.6786rem;
+  height: 0.8571rem;
   width: 100%;
   display: flex;
   flex-flow: row nowrap;
@@ -448,7 +452,7 @@
   width: 3.2143rem;
   height: 0.8571rem;
   min-width: 75px;
-  line-height: 0.6072rem;
+  line-height: 12px;
   border-radius: 3px;
   background-color: rgba(231, 231, 231, 1);
   color: rgba(16, 16, 16, 1);
@@ -560,7 +564,7 @@
   letter-spacing:1.5px;
   text-align:center;
   width:155px;
-  margin-top:20px;
+  margin:20px auto;
   animation: fade 2s infinite;
  }
 .loadingContainer{
@@ -571,7 +575,7 @@
   height:3px;
   background:#f6f6f6;
   display:inline-block;
-  margin-left:-8px;
+  /* margin-left:-8px; */
  }
  .stick:nth-child(n) {  
   transform:rotate(30deg);
@@ -938,8 +942,8 @@
   cursor:pointer;
 }
 .openBrochureContainer{
-  width: 44.57rem;
-  height: 20.5rem;
+  width: 35.656rem;
+  height: 16.4rem;
   position: fixed;
   top: 50%;
   left: 50%;
@@ -960,8 +964,8 @@
   }
 }
 .brochureContent{
-  width: 17.86rem;
-  height: 17.86rem;
+  width: 14.288rem;
+  height: 14.288rem;
   display: flex;
   flex-flow: row wrap;
   justify-content: flex-start;
@@ -970,8 +974,8 @@
   margin-left: 0.625rem;
 }
 .brochureContent2{
-  width: 17.86rem;
-  height: 17.86rem;
+  width: 14.288rem;
+  height: 14.288rem;
   display: flex;
   flex-flow: row wrap;
   justify-content: flex-start;
@@ -983,8 +987,8 @@
   display: none;
 } */
 .brochureContentItem{
-  width: 8.5rem;
-  height: 8.5rem;
+  width: 6.6rem;
+  height: 6.6rem;
   padding: 1px;
 }
 .brochureContentItem img{
@@ -994,8 +998,8 @@
   display: block;
 }
 .buttonContainerCancel{
-  width: 1.41rem;
-  height: 1.5rem;
+  width: 1.128rem;
+  height: 1.2rem;
   background-image: url(../public/brochureESC.png); 
   background-repeat: no-repeat;
   background-size: cover;
@@ -1005,8 +1009,8 @@
   cursor:pointer;
 }
 .brochurePageLeft{
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 1.2rem;
+  height: 1.2rem;
   background-image: url(../public/broLeft.png); 
   background-repeat: no-repeat;
   background-size: cover;
@@ -1016,8 +1020,8 @@
   transform: translate(0,-50%);
 }
 .brochurePageRight{
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 1.2rem;
+  height: 1.2rem;
   background-image: url(../public/broRight.png); 
   background-repeat: no-repeat;
   background-size: cover;

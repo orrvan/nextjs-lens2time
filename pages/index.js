@@ -27,7 +27,7 @@ function Header({headerProps}){
   const [token, setToken] = React.useState()
 
   React.useEffect(()=>{
-    console.log('UE1')
+    // console.log('UE1')
   /* when the app loads, check to see if the user has already connected their wallet */
     checkConnection()
   },[])
@@ -54,7 +54,7 @@ function Header({headerProps}){
           mydefalutProfile.avatarUrl = picture.original.url
         }
       }
-      console.log(mydefalutProfile)
+      // console.log(mydefalutProfile)
       // console.log(picture)
       headerProps.setMyProfile(mydefalutProfile)
       /************获取个人在我们服务器上的信息 开 *******************************/
@@ -99,7 +99,7 @@ function Header({headerProps}){
     const accounts = await provider.listAccounts()
     if (accounts.length) {
       setAddress(accounts[0])
-      console.log(accounts)
+      // console.log(accounts)
     }
   }
   async function connect() {
@@ -107,7 +107,7 @@ function Header({headerProps}){
     const account = await window.ethereum.send('eth_requestAccounts')
     if (account.result.length) {
       setAddress(account.result[0])
-      console.log(address)
+      // console.log(address)
     }
   }
   async function login() {
@@ -131,7 +131,7 @@ function Header({headerProps}){
       /* if user authentication is successful, you will receive an accessToken and refreshToken */
       const { data: { authenticate: { accessToken }}} = authData
   
-      console.log({ accessToken })
+      // console.log({ accessToken })
       setToken(accessToken)
       /*********************************获取个人在LENS上的信息开*********************** */
       fetchProfile()
@@ -176,7 +176,7 @@ function BodyACollection({bodyACollectionProps}){
   useEffect(() =>{},[])
   // console.log(3)
   function creatBrochure(){
-    console.log('正在创建册子')
+    // console.log('正在创建册子')
     bodyACollectionProps.brochureSelected.current={brochure:[],brochureTag:[]}
     bodyACollectionProps.setaddCollectionComponentFlag(true)
     bodyACollectionProps.setAddOrEditCollectionComponentFlag(true)
@@ -201,7 +201,7 @@ function BodyAExhibition({bodyAExhibitionProps}){
       <div className={styles.bodyAExhibition}>
         <div className={styles.collectionSlogan}>Use Lenstime now to create your solo exhibition</div>
         <div className={styles.collectionDomain}>
-          <div className={styles.collectionAdd}>Create  Exhibition</div>
+          <div className={styles.collectionAdd}>COMING  SOON</div>
           {/* <div onClick={createExhibition} className={styles.collectionAdd}>Create  Exhibition</div> */}
         </div>   
       </div>
@@ -232,7 +232,7 @@ function AddCollectionComponent({addCollectionComponentProps}){
   const reloadCount =React.useRef(0)
   // const brochure =[]
   // const brochure =React.useRef([])
-  console.log(brochure)
+  // console.log(brochure)
   /*********用来收集创建册子的表单数据 ******************************/
   const dataCreateBrochure =React.useRef({brochureName:addCollectionComponentProps.brochureSelected.current.brochureName,brochureTag:addCollectionComponentProps.brochureSelected.current.brochureTag,brochure:[]})
 
@@ -278,10 +278,10 @@ function AddCollectionComponent({addCollectionComponentProps}){
           variables:{id:profileId,limit:12,publicationTypes:['POST','MIRROR'],cursor:dataRef.current.cursor[index]}
         })
         let myPublications ={ ...userPublications.data.publications}
-        console.log(myPublications)
+        // console.log(myPublications)
 
         dataRef.current.cursor = [myPublications.pageInfo.prev,myPublications.pageInfo.next]
-        console.log(dataRef)
+        // console.log(dataRef)
         /*****通过Promise.all 和map函数 重新得到一个简化过滤后的 帖子数组 publicationsData，将LENS服务器上不可读的图片地址转换成https图片地址 开************/
         let publicationsData = await Promise.all(myPublications.items.map(async publicationInfo => {
           let publish = {}
@@ -313,7 +313,7 @@ function AddCollectionComponent({addCollectionComponentProps}){
             publicationsPictures.push(temObj)
           }
         })
-        console.log(publicationsPictures)
+        // console.log(publicationsPictures)
          /*****通过map函数 得到一个 非帖子 纯图片数组publicationsPictures 关*************/
          /*******如果index == 1  fetchPublications(1)那么出版物数组将被连更，否则用fetchPublications(0)，出版物将被重置*/       
         if(index == 1){
@@ -331,7 +331,7 @@ function AddCollectionComponent({addCollectionComponentProps}){
         console.log({ err })
       }
     }else{
-      console.log('请先登录')
+      alert('请先登录')
       addCollectionComponentProps.setLoadingFlag(false)
     }
   }
@@ -340,16 +340,16 @@ function AddCollectionComponent({addCollectionComponentProps}){
     if(addCollectionComponentProps.myProfile){
       try {
         const address= addCollectionComponentProps.myProfile.ownedBy
-        console.log(address)
+        // console.log(address)
         const userCollections = await client.query({
           query:collections,
           variables:{address:address,limit:12,publicationTypes:['POST'],cursor:dataRefCollections.current.cursor[index]}
         })
         let myCollections ={ ...userCollections.data.publications}
-        console.log(myCollections)
+        // console.log(myCollections)
 
         dataRefCollections.current.cursor = [myCollections.pageInfo.prev,myCollections.pageInfo.next]
-        console.log(myCollections.pageInfo.next)
+        // console.log(myCollections.pageInfo.next)
         let collectionsData = await Promise.all(myCollections.items.map(async collectionInfo => {
           let collection = {}
           collection.id=collectionInfo.id
@@ -377,7 +377,7 @@ function AddCollectionComponent({addCollectionComponentProps}){
             collectionsPictures.push(temObj)
           }
         })
-        console.log(collectionsPictures)   
+        // console.log(collectionsPictures)   
         if(index == 1){
           let temparr=dataRefCollections.current.pictures.concat(collectionsPictures)
           dataRefCollections.current.pictures=temparr
@@ -389,12 +389,12 @@ function AddCollectionComponent({addCollectionComponentProps}){
         console.log({ err })
       }
     }else{
-      console.log('请先登录')
+      alert('请先登录')
     }
   }
   /******************装填背包，获取个人在我们服务器上建立相册已用过的图片，然后查重，最后绘制背包图片 */
   async function fetchKnapsack(knapsackIndex){
-      console.log('正在装填背包图片')
+      // console.log('正在装填背包图片')
       let pictures
       if(knapsackIndex == 1){
         pictures=dataRef.current.pictures
@@ -407,9 +407,9 @@ function AddCollectionComponent({addCollectionComponentProps}){
       // addCollectionComponentProps.setLoadingFlag(false)
       if(searchData.data.length>0){
         console.log('找到了用户')
-        console.log(searchData)
+        // console.log(searchData)
         let data = JSON.parse(searchData.data[0].data)
-        console.log(data)
+        // console.log(data)
         /********图片是否被选中过处理函数 */
         let imgAllBeUsed =[]
         data.brochures.map(brochureItem =>{
@@ -417,27 +417,27 @@ function AddCollectionComponent({addCollectionComponentProps}){
             imgAllBeUsed.push(picture.src)
           })
         })
-        console.log(imgAllBeUsed)
+        // console.log(imgAllBeUsed)
         let imgAllBeUseLength =imgAllBeUsed.length
         /********图片是否被选中过处理函数 */
           if(imgAllBeUseLength >0 && pictures.length > 0 ){
-            console.log('用户添加过图片/创建过图册')
+            // console.log('用户添加过图片/创建过图册')
               for(let i=0;i<pictures.length;i++){
                 for(let j=0;j<imgAllBeUseLength;j++){
                     // console.log(pictures[i].src)
                     if(imgAllBeUsed[j] == pictures[i].src){
-                      console.log('该图片已存在')
+                      // console.log('该图片已存在')
                       pictures.splice(i,1)
                       i--
                       break
                     }else{
-                      console.log('该图片不存在')
+                      // console.log('该图片不存在')
                     }
                 }
               }
               if(pictures.length>=12){
                   reloadCount.current =0
-                console.log('图片数量满足绘制')
+                // console.log('图片数量满足绘制001')
                 addCollectionComponentProps.setLoadingFlag(false)
                 if(knapsackIndex == 1 ){
                   drawKnapsack(1)
@@ -446,11 +446,11 @@ function AddCollectionComponent({addCollectionComponentProps}){
                   drawKnapsack(2)
                   setPageFlag2(true)
                 }
-                console.log(pictures)
+                // console.log(pictures)
               }else{
-                console.log('图片数量不满足绘制，需要重新装填出版物')
+                // console.log('图片数量不满足绘制，需要重新装填出版物002')
                 if(reloadCount.current>5){
-                  console.log('装填次数太多依旧不满足') 
+                  alert('图片数量不满足绘制003') 
                   addCollectionComponentProps.setLoadingFlag(false)
                   return false
                 }
@@ -469,7 +469,7 @@ function AddCollectionComponent({addCollectionComponentProps}){
             console.log('用户还未添加过图片到我们服务器')
             if(pictures.length>=12){
               reloadCount.current =0
-              console.log('图片数量满足绘制')
+              // console.log('图片数量满足绘制004')
               addCollectionComponentProps.setLoadingFlag(false)
               if(knapsackIndex == 1){
                 drawKnapsack(1)
@@ -478,9 +478,10 @@ function AddCollectionComponent({addCollectionComponentProps}){
               }
               console.log(pictures)
             }else{
-              console.log('图片数量不满足绘制，需要重新装填出版物')
+              // console.log('图片数量不满足绘制,需要重新装填出版物005')
               if(reloadCount.current>5){
-                console.log('装填次数太多依旧不满足') 
+                alert('图片数量不满足绘制') 
+                // console.log('装填次数太多依旧不满足') 
                 addCollectionComponentProps.setLoadingFlag(false)
                 return false
               }
@@ -494,7 +495,7 @@ function AddCollectionComponent({addCollectionComponentProps}){
             }
           }
       }else{
-        console.log('请先登录/未找到该用户')
+        alert('请先登录/未找到该用户')
       }
     }
 
@@ -513,7 +514,7 @@ function AddCollectionComponent({addCollectionComponentProps}){
     }
     // console.log(temparr[index.current])
     if(temparr[temIndex]){
-      console.log('当前数组有内容')
+      // console.log('当前数组有内容')
       if(knapsackIndex == 1){
         setPageIndex(temIndex)
       }else{
@@ -521,16 +522,16 @@ function AddCollectionComponent({addCollectionComponentProps}){
       }
  
     }else{
-      console.log('当前数组无内容')
+      // console.log('当前数组无内容')
       if(pictures.length >=12 ){
-        console.log(temparr.length)
-        console.log(pictures)
-        console.log('缓存数组图片大于12张,正在制作并绘制背包的12张图片')
+        // console.log(temparr.length)
+        // console.log(pictures)
+        // console.log('缓存数组图片大于12张,正在制作并绘制背包的12张图片006')
         let groupA =pictures.splice(0,4)
         let groupB =pictures.splice(0,4)
         let groupC =pictures.splice(0,4)
         temparr[temIndex]=[groupA,groupB,groupC]
-        console.log(temparr)
+        // console.log(temparr)
         if(knapsackIndex == 1){
           setKnapsackPictures(temparr)
           setPageIndex(temIndex)
@@ -539,7 +540,7 @@ function AddCollectionComponent({addCollectionComponentProps}){
           setPageIndex2(temIndex)
         }
       }else{
-        console.log('图片不足以制作并绘制')
+        console.log('图片不足以制作并绘制007')
         // index--
         if(knapsackIndex == 1){
           fetchPublications(1)
@@ -557,7 +558,7 @@ function AddCollectionComponent({addCollectionComponentProps}){
       alert('当前已经是第一页')
     }else{
       e.stopPropagation() //阻止冒泡事件
-      console.log('用户想看上一页')
+      // console.log('用户想看上一页')
       pageIndex--
       console.log(pageIndex)
       drawKnapsack(1)
@@ -568,36 +569,36 @@ function AddCollectionComponent({addCollectionComponentProps}){
       alert('当前已经是第一页')
     }else{
       e.stopPropagation() //阻止冒泡事件
-      console.log('用户想看上一页')
+      // console.log('用户想看上一页')
       pageIndex2--
       console.log(pageIndex2)
       drawKnapsack(2)
     }
   }
   function turnRight(e){
-    console.log('你正在使用post的翻页')
+    // console.log('你正在使用post的翻页')
     e.stopPropagation() //阻止冒泡事件
-    console.log('用户想看下一页')
+    // console.log('用户想看下一页')
     pageIndex++
     // pageIndex++
-    console.log(pageIndex)
+    console.log('当前页数'+pageIndex)
     drawKnapsack(1)
   }
   function turnRight2(e){
-    console.log('你正在使用collection的翻页')
+    // console.log('你正在使用collection的翻页')
     e.stopPropagation() //阻止冒泡事件
-    console.log('用户想看下一页')
+    // console.log('用户想看下一页')
     pageIndex2++
     // pageIndex++
-    console.log(pageIndex2)
+    console.log('当前页数'+pageIndex2)
     drawKnapsack(2)
   }
   function ImgClick(e,groupIndex,itemIndex,pictureItem){
     // console.log(e)
     e.stopPropagation()
-    console.log(groupIndex)
-    console.log(itemIndex)
-    console.log(pictureItem)
+    // console.log(groupIndex)
+    // console.log(itemIndex)
+    // console.log(pictureItem)
     let tempState =0
     if(pictureItem.state[0]==0){
       tempState=1
@@ -617,7 +618,7 @@ function AddCollectionComponent({addCollectionComponentProps}){
         }
       }
     }
-    console.log(brochure)
+    // console.log(brochure)
     let temObj =[].concat(knapsackPictures)
     temObj[pageIndex][groupIndex][itemIndex].state[0]=tempState
     setKnapsackPictures(temObj)
@@ -625,9 +626,9 @@ function AddCollectionComponent({addCollectionComponentProps}){
   function ImgClick2(e,groupIndex,itemIndex,pictureItem){
     // console.log(e)
     e.stopPropagation()
-    console.log(groupIndex)
-    console.log(itemIndex)
-    console.log(pictureItem)
+    // console.log(groupIndex)
+    // console.log(itemIndex)
+    // console.log(pictureItem)
     let tempState =0
     if(pictureItem.state[0]==0){
       tempState=1
@@ -647,7 +648,7 @@ function AddCollectionComponent({addCollectionComponentProps}){
         }
       }
     }
-    console.log(brochure)
+    // console.log(brochure)
     let temObj =[].concat(knapsackPictures2)
     temObj[pageIndex2][groupIndex][itemIndex].state[0]=tempState
     setKnapsackPictures2(temObj)
@@ -655,8 +656,8 @@ function AddCollectionComponent({addCollectionComponentProps}){
   function ImgClick3(e,brochurePictureItem,brochureIndex){
     // console.log(e)
     e.stopPropagation()
-    console.log(brochurePictureItem)
-    console.log(brochureIndex)
+    // console.log(brochurePictureItem)
+    // console.log(brochureIndex)
 
     if(brochurePictureItem.state[0]==1){
       let tempArr =[].concat(brochure)
@@ -666,7 +667,7 @@ function AddCollectionComponent({addCollectionComponentProps}){
     }else{
       console.log('出错了,不应该有状态为0的图片')
     }
-    console.log(brochure)
+    // console.log(brochure)
     // let temObj =[].concat(knapsackPictures2)
     // temObj[pageIndex2][groupIndex][itemIndex].state[0]=tempState
     // setKnapsackPictures2(temObj)
@@ -705,38 +706,38 @@ function AddCollectionComponent({addCollectionComponentProps}){
   }
   async function submitCreate(){
     addCollectionComponentProps.setLoadingFlag(true)
-    console.log(dataCreateBrochure)
+    // console.log(dataCreateBrochure)
     dataCreateBrochure.current.brochure = [].concat(brochure)
     dataCreateBrochure.current.category='Image'
     const regexStr =/^[\u4e00-\u9fa5_a-zA-Z0-9]+$/
-    if(regexStr.test(dataCreateBrochure.current.brochureName)){
+    if(dataCreateBrochure.current.brochureName && regexStr.test(dataCreateBrochure.current.brochureName)){
       console.log('册子名字没啥问题')
     }else{
-      console.log('册子姓名只能是数字、字母和中文组成，不能包含特殊符号和空格。')
+      alert('册子姓名只能是数字、字母和中文组成，不能包含特殊符号和空格。')
       addCollectionComponentProps.setLoadingFlag(false)
       return false
     }
     if(dataCreateBrochure.current.brochureTag.length>0){
       for(let i=0;i<dataCreateBrochure.current.brochureTag.length;i++){
         if(!regexStr.test(dataCreateBrochure.current.brochureTag[i])){
-          console.log('标签只能是数字、字母和中文组成，不能包含特殊符号和空格。')
+          alert('标签只能是数字、字母和中文组成，不能包含特殊符号和空格。')
           addCollectionComponentProps.setLoadingFlag(false)
           return false
         }
       }
     }else{
-      console.log('至少需要一个标签？')
+      // console.log('至少需要一个标签？')
     }
     if(dataCreateBrochure.current.brochure.length>0){
       console.log('我准备将你的册子写入数据库了')
       let user =addCollectionComponentProps.myProfile.name
       const searchData = await addCollectionComponentProps.searchUser(user)
-      console.log(searchData)
+      // console.log(searchData)
       if(searchData.data.length>0){
         console.log('找到了用户')
         let data = JSON.parse(searchData.data[0].data)
         let id = searchData.data[0]._id
-        console.log(id)
+        // console.log(id)
         // console.log(data)
         // data.brochures={...dataCreateBrochure.current}
         data.brochures.push(dataCreateBrochure.current)
@@ -745,7 +746,7 @@ function AddCollectionComponent({addCollectionComponentProps}){
         // })
         // let value=JSON.stringify(data)
         const updatedUser= await addCollectionComponentProps.save(id,data)
-        console.log(updatedUser)
+        // console.log(updatedUser)
         // addCollectionComponentProps.findAndSave(user,value)
         // window.localStorage.setItem(user,value)
         /***********这里估计是一个异步操作，需要loading，然后关闭创建册子的组件，或者直接关闭 */
@@ -759,11 +760,12 @@ function AddCollectionComponent({addCollectionComponentProps}){
         // dataRefCollections.current = {cursor:[null,null],pictures:[]}
         // console.log(data)
       }else{
-        console.log('没找到用户，并且没有在用户登录的时候，新建用户')
+        alert('没找到用户，并且没有在用户登录的时候，新建用户')
       }
 
     }else{
-      console.log('图册未添加任何图片')
+      alert('图册未添加任何图片')
+      addCollectionComponentProps.setLoadingFlag(false)
       return false
     }
   }
@@ -771,9 +773,9 @@ function AddCollectionComponent({addCollectionComponentProps}){
     addCollectionComponentProps.setLoadingFlag(true)
     let index = addCollectionComponentProps.brochureSelected.current.index
     dataCreateBrochure.current.brochure = [].concat(brochure)
-    console.log(dataCreateBrochure)
+    // console.log(dataCreateBrochure)
     const regexStr =/^[\u4e00-\u9fa5_a-zA-Z0-9]+$/
-    if(regexStr.test(dataCreateBrochure.current.brochureName)){
+    if(dataCreateBrochure.current.brochureName && regexStr.test(dataCreateBrochure.current.brochureName)){
       console.log('册子名字没啥问题')
     }else{
       console.log('册子姓名只能是数字、字母和中文组成，不能包含特殊符号和空格。')
@@ -789,33 +791,34 @@ function AddCollectionComponent({addCollectionComponentProps}){
         }
       }
     }else{
-      console.log('至少需要一个标签？')
+      // console.log('至少需要一个标签？')
     }
     if(dataCreateBrochure.current.brochure.length>0){
       console.log('我准备开始修改你的册子了')
       let user =addCollectionComponentProps.myProfile.name
       const searchData = await addCollectionComponentProps.searchUser(user)
-      console.log(searchData)
+      // console.log(searchData)
       if(searchData.data.length>0){
         console.log('找到了用户')
         let data = JSON.parse(searchData.data[0].data)
         let id = searchData.data[0]._id
         // console.log(data.brochures)
         data.brochures[index]=dataCreateBrochure.current
-        console.log(data)
+        // console.log(data)
         const updatedUser= await addCollectionComponentProps.save(id,data)
-        console.log(updatedUser)
+        // console.log(updatedUser)
         /***********这里估计是一个异步操作，需要loading，然后关闭创建册子的组件，或者直接关闭 */
         addCollectionComponentProps.setaddCollectionComponentFlag(false)
         // addCollectionComponentProps.setbodyBCollectionBlankFlag(false)
         addCollectionComponentProps.setMyBrochures(data.brochures)
         addCollectionComponentProps.setLoadingFlag(false)
       }else{
-        console.log('没找到用户，并且没有在用户登录的时候，新建用户')
+        alert('没找到用户，并且没有在用户登录的时候，新建用户')
       }
 
     }else{
-      console.log('图册未添加任何图片')
+      alert('图册未添加任何图片')
+      addCollectionComponentProps.setLoadingFlag(false)
       return false
     }
   }
@@ -827,7 +830,7 @@ function AddCollectionComponent({addCollectionComponentProps}){
             <p>NAME</p>
             <input onChange={(e)=>{dataCreateBrochure.current.brochureName= e.target.value}} placeholder={dataCreateBrochure.current.brochureName|| 'illustration'}></input>
           </div>
-          <div onClick={cancelCreatBrochure}  className={styles.part1_p2X}>🗙</div>
+          <div onClick={cancelCreatBrochure}  className={styles.part1_p2X}></div>
         </div>
         <div className={styles.collectionView_part2}>
           <input onChange={(e)=>{dataCreateBrochure.current.brochureTag[0] = e.target.value}} placeholder={dataCreateBrochure.current.brochureTag[0] || '+ Add label'}></input>
@@ -1030,7 +1033,7 @@ function BodyBCollectionFull({bodyBCollectionFullProps}){
   
   function brochureClick(e,brochureItem,brochureIndex){
     /*****首先初始化 */
-    console.log(brochureItem,brochureIndex)
+    // console.log(brochureItem,brochureIndex)
     setOpenBrochureFlag(true)
     // setPageIndex(pageIndex)
     drawBrochure(brochureItem.brochure)
@@ -1043,22 +1046,22 @@ function BodyBCollectionFull({bodyBCollectionFullProps}){
     let delNum = brochureIndex
     /****删除并保存 */
     temArr.splice(delNum,1)
-    console.log(temArr)
+    // console.log(temArr)
     let user =bodyBCollectionFullProps.myProfile.name
     const searchData = await bodyBCollectionFullProps.searchUser(user)
-    console.log(searchData)
+    // console.log(searchData)
     if(searchData.data.length>0){
       console.log('找到了用户')
       let data = JSON.parse(searchData.data[0].data)
       let id = searchData.data[0]._id
       data.brochures = temArr
-      console.log(data)
+      // console.log(data)
       const updatedUser= await bodyBCollectionFullProps.save(id,data)
-      console.log(updatedUser)
+      // console.log(updatedUser)
       bodyBCollectionFullProps.setMyBrochures(temArr)
       bodyBCollectionFullProps.setLoadingFlag(false)
     }else{
-      console.log('没找到用户，并且没有在用户登录的时候，新建用户')
+      alert('没找到用户，并且没有在用户登录的时候，新建用户')
     }
   }
   function brochureEdit(e,brochureItem,brochureIndex){
@@ -1068,7 +1071,7 @@ function BodyBCollectionFull({bodyBCollectionFullProps}){
     let temObj = JSON.parse(tempStr)
     // console.log(temObj)
     bodyBCollectionFullProps.brochureSelected.current= temObj
-    console.log(bodyBCollectionFullProps.brochureSelected.current)
+    // console.log(bodyBCollectionFullProps.brochureSelected.current)
     bodyBCollectionFullProps.setaddCollectionComponentFlag(true)
     bodyBCollectionFullProps.setAddOrEditCollectionComponentFlag(false)
   }
@@ -1085,8 +1088,8 @@ function BodyBCollectionFull({bodyBCollectionFullProps}){
       rightArr[pageIndex] = updateArr.splice(0,4)
       setBrochureLeftItem(leftArr)
       setBrochureRightItem(rightArr)
-      console.log(leftArr)
-      console.log(rightArr)
+      // console.log(leftArr)
+      // console.log(rightArr)
       setUpdateBrochureItem(updateArr)
       setBrochurePageRightFlag(true)
     }else{
@@ -1097,8 +1100,8 @@ function BodyBCollectionFull({bodyBCollectionFullProps}){
       rightArr[pageIndex]  = updateArr
       setBrochureLeftItem(leftArr)
       setBrochureRightItem(rightArr)
-      console.log(leftArr)
-      console.log(rightArr)
+      // console.log(leftArr)
+      // console.log(rightArr)
     }
   }
   function closeBrochure(){
@@ -1113,7 +1116,7 @@ function BodyBCollectionFull({bodyBCollectionFullProps}){
   function pageUp(){
     pageIndex++
     setBrochurePageLeftFlag(true)
-    console.log(pageIndex)
+    console.log('当前页数'+pageIndex)
     setPageIndex(pageIndex)
     drawBrochure(updateBrochureItem)
   }
@@ -1126,7 +1129,7 @@ function BodyBCollectionFull({bodyBCollectionFullProps}){
       setBrochurePageRightFlag(true)
       return false
     }else{
-      console.log(pageIndex)
+      console.log('当前页数'+pageIndex)
       setPageIndex(pageIndex)
       // drawBrochure(updateBrochureItem)
     }
@@ -1218,7 +1221,7 @@ export default function Home() {
   const [addOrEditCollectionComponentFlag,setAddOrEditCollectionComponentFlag] = React.useState(true)
   /****册子必须是全局变量，因为它要在好几个组件中显示*/
   const [myBrochures,setMyBrochures] =React.useState([])
-  var brochureSelected =React.useRef({brochure:[],brochureTag:[],brochureName:''})
+  var brochureSelected =React.useRef({brochure:[],brochureTag:[],brochureName:null})
   /*********拖拽必须是全局变量，否则在组件每次渲染时都会重置状态 */
   const [dragDisabled,setDragDisabled] =React.useState(false)
 
@@ -1240,7 +1243,7 @@ const createUser = async (name,value) => {
     }),
   });
   const data = await res.json()
-  console.log(data)
+  // console.log(data)
   setLoadingFlag(false)
 }
 const searchUser = async (name) => {
@@ -1279,7 +1282,7 @@ const save = async (id,value) => {
   // /*********************************获取用户在我们数据库 包含已创建图册的全图片数组，和图册对象 关*** */
 
   React.useEffect(() => {
-    console.log('UE0')
+    // console.log('UE0')
     /**********************************************根据窗口尺寸来调整html根元素fontsize************************************* **/
     // const handleResize = () => {
     //   setWidth(window.innerWidth);
