@@ -66,7 +66,7 @@ function Header({headerProps}){
       headerProps.setLoadingFlag(false)
       console.log(searchData.data.length)
       // console.log()
-      if(searchData.data.length>0){
+      if(searchData.data.length){
         if(searchData.data.length>0){
           console.log('找到了用户')
           let data = JSON.parse(searchData.data[0].data)
