@@ -2,9 +2,10 @@ import React, { useEffect } from 'react'
 import styles from '../styles/Home.module.css'
 import { ethers } from 'ethers'
 import { client, challenge, authenticate,defaultProfile,publications,collections} from '../api'
-import Draggable, {DraggableCore} from 'react-draggable'; // Both at the same time
-import { Resizable } from 'react-resizable';
-import { ResizableBox } from 'react-resizable';
+// import Draggable, {DraggableCore} from 'react-draggable'; // Both at the same time
+// import { Resizable } from 'react-resizable';
+// import { ResizableBox } from 'react-resizable';
+// import Link from 'next/link';
 // import Image from 'next/image'
 // import { id } from 'ethers/lib/utils'
 // import { DefaultProfileDocument, DefaultProfileRequest } from '../graphql/generated';
@@ -1161,6 +1162,8 @@ function BodyBCollectionFull({bodyBCollectionFullProps}){
               brochureLeftItem[pageIndex] && brochureLeftItem[pageIndex].map((brochurePictureItem,brochurePictureIndex) =>{
                 return <div key={brochurePictureIndex} className={styles.brochureContentItem}  >
                   <img src={brochurePictureItem.src}></img>
+
+                  <a target="_blank" href={'https://lenster.xyz/posts/'+brochurePictureItem.id}>LENSTER</a>
                 </div>
               })
             }            
@@ -1172,6 +1175,7 @@ function BodyBCollectionFull({bodyBCollectionFullProps}){
               brochureRightItem[pageIndex] && brochureRightItem[pageIndex].map((brochurePictureItem,brochurePictureIndex) =>{
                 return <div key={brochurePictureIndex} className={styles.brochureContentItem}  >
                   <img src={brochurePictureItem.src}></img>
+                  <a target="_blank" href={'https://lenster.xyz/posts/'+brochurePictureItem.id}>LENSTER</a>
                 </div>
               })
             }
@@ -1322,9 +1326,9 @@ const save = async (id,value) => {
     {
       bodyAExhibitionFlag == true && bodyBExhibitionBlankFlag == true && <BodyBExhibitionBlank></BodyBExhibitionBlank>
     }
-    {
+    {/* {
       screenWidth.current>750 && addExhibitionComponentFlag == true && <AddExhibitionComponent addExhibitionComponentProps={{addExhibitionComponentFlag,setaddExhibitionComponentFlag,myProfile,setMyProfile,myBrochures,setMyBrochures,dragDisabled,setDragDisabled}} ></AddExhibitionComponent>
-    }
+    } */}
     {
       bodyAExhibitionFlag == true && bodyBExhibitionBlankFlag == false && <BodyBExhibitionFull></BodyBExhibitionFull>
     }
