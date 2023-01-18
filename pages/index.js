@@ -338,6 +338,7 @@ function AddCollectionComponent({addCollectionComponentProps}){
   }
   /****************获取个人在LENS服务器上的所有收藏品，并生成图片数组 *******************************/
   async function fetchCollections(index){
+    addCollectionComponentProps.setLoadingFlag(true)
     if(addCollectionComponentProps.myProfile){
       try {
         const address= addCollectionComponentProps.myProfile.ownedBy
@@ -391,6 +392,7 @@ function AddCollectionComponent({addCollectionComponentProps}){
       }
     }else{
       alert('请先登录')
+      addCollectionComponentProps.setLoadingFlag(false)
     }
   }
   /******************装填背包，获取个人在我们服务器上建立相册已用过的图片，然后查重，最后绘制背包图片 */
@@ -473,8 +475,10 @@ function AddCollectionComponent({addCollectionComponentProps}){
               // console.log('图片数量满足绘制004')
               addCollectionComponentProps.setLoadingFlag(false)
               if(knapsackIndex == 1){
+                setPageFlag(true)
                 drawKnapsack(1)
               }else{
+                setPageFlag2(true)
                 drawKnapsack(2) 
               }
               console.log(pictures)
