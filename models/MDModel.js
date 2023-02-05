@@ -8,8 +8,8 @@ const lens2timeUser = new Schema({
   },
   data: {
     type: String,
-    required: true,
-    unique: true,
+    required: false,
+    unique: false,
   },
 });
 

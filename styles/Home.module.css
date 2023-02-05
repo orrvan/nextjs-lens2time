@@ -154,12 +154,14 @@
   /* background-color: black; */
   margin-bottom: 98px;
   display: flex;
+  flex-flow: column nowrap;
   justify-content: center;
   align-items: center;
 }
 .collectionAdd{
-  width: 11.32%;
-  min-width: 160px;
+  margin: 1px 0;
+  width: 13.32%;
+  min-width: 200px;
   height: 32px;
   line-height: 32px;
   border-radius: 2px;
@@ -806,7 +808,7 @@
   height: 24px;
   display: flex;
   flex-flow: row nowrap;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
 }
 .part4_PageBtn_turnLeft{

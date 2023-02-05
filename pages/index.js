@@ -39,6 +39,7 @@ function Header({headerProps}){
         query:defaultProfile,
         variables: { address }
       })
+      // console.log(defaultProfileInfo)
       /*********************对象拷贝开 *************************************************************/
       let mydefalutProfile ={ ...defaultProfileInfo.data.defaultProfile}
       /*********************对象拷贝关 *************************************************************/
@@ -55,18 +56,18 @@ function Header({headerProps}){
           mydefalutProfile.avatarUrl = picture.original.url
         }
       }
-      // console.log(mydefalutProfile)
+      console.log(mydefalutProfile)
       // console.log(picture)
       headerProps.setMyProfile(mydefalutProfile)
       /************获取个人在我们服务器上的信息 开 *******************************/
       
-      let user =mydefalutProfile.name
+      let user =mydefalutProfile.handle
       //用户加载的loading可以在这里设计
       headerProps.setLoadingFlag(true)
       const searchData = await headerProps.searchUser(user)
       headerProps.setLoadingFlag(false)
-      // console.log(searchData.data.length)
-      // console.log()
+      console.log(user)
+      console.log()
       if(searchData.data){
         if(searchData.data.length>0){
           console.log('找到了用户')
@@ -186,7 +187,9 @@ function BodyACollection({bodyACollectionProps}){
   <div className={styles.bodyACollection}>
       <div className={styles.collectionSlogan}>Use Lenstime now to create your own brochure</div>
       <div className={styles.collectionDomain}>
-        <div onClick={creatBrochure} className={styles.collectionAdd}>Create  Brochure</div>
+        <div onClick={creatBrochure} className={styles.collectionAdd}>Create Image Brochure</div>
+        <div onClick={creatBrochure} className={styles.collectionAdd}>Create Audio  Brochure</div>
+        <div onClick={creatBrochure} className={styles.collectionAdd}>Create Video Brochure</div>
       </div>  
   </div>
   )
@@ -230,17 +233,23 @@ function AddCollectionComponent({addCollectionComponentProps}){
   const noImage="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http%3A//www.w3.org/2000/svg' viewBox='0 0 700 475'%3E%3Cfilter id='b' color-interpolation-filters='sRGB'%3E%3CfeGaussianBlur stdDeviation='20'/%3E%3C/filter%3E%3Cimage preserveAspectRatio='none' filter='url(%23b)' x='0' y='0' height='100%25' width='100%25' href='data:image/svg+xml;base64,CiAgPHN2ZyB3aWR0aD0iNzAwIiBoZWlnaHQ9IjQ3NSIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIj4KICAgIDxkZWZzPgogICAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImciPgogICAgICAgIDxzdG9wIHN0b3AtY29sb3I9IiMzMzMiIG9mZnNldD0iMjAlIiAvPgogICAgICAgIDxzdG9wIHN0b3AtY29sb3I9IiMyMjIiIG9mZnNldD0iNTAlIiAvPgogICAgICAgIDxzdG9wIHN0b3AtY29sb3I9IiMzMzMiIG9mZnNldD0iNzAlIiAvPgogICAgICA8L2xpbmVhckdyYWRpZW50PgogICAgPC9kZWZzPgogICAgPHJlY3Qgd2lkdGg9IjcwMCIgaGVpZ2h0PSI0NzUiIGZpbGw9IiMzMzMiIC8+CiAgICA8cmVjdCBpZD0iciIgd2lkdGg9IjcwMCIgaGVpZ2h0PSI0NzUiIGZpbGw9InVybCgjZykiIC8+CiAgICA8YW5pbWF0ZSB4bGluazpocmVmPSIjciIgYXR0cmlidXRlTmFtZT0ieCIgZnJvbT0iLTcwMCIgdG89IjcwMCIgZHVyPSIxcyIgcmVwZWF0Q291bnQ9ImluZGVmaW5pdGUiICAvPgogIDwvc3ZnPg=='/%3E%3C/svg%3E"
   const [brochure,setBrochure] =React.useState(addCollectionComponentProps.brochureSelected.current.brochure)
   // const [brochure,setBrochure] =React.useState([])
+  /****************用来控制用户到底能不能继续装载POST或者Collections，如果用户总帖子少于12条，那么无需再装载，如何用户装计载计数器大于5次，图片还是小于12张，也无需再加载************************ */
   const reloadCount =React.useRef(0)
-  // const brochure =[]
-  // const brochure =React.useRef([])
-  // console.log(brochure)
+  const reloadCollectionsCount =React.useRef(0)
+  //*************如果用户本来帖子就很少，或者帖子已经被fetch完毕，那么允许用户在少于12张图片的情况下绘制背包********/
+  const fetchPubFlag =React.useRef(true)
+  const fetchColFlag =React.useRef(true)
   /*********用来收集创建册子的表单数据 ******************************/
   const dataCreateBrochure =React.useRef({brochureName:addCollectionComponentProps.brochureSelected.current.brochureName,brochureTag:addCollectionComponentProps.brochureSelected.current.brochureTag,brochure:[]})
 
   /********pageIndex和pageIndex2 分别用来存储俩个背包在对应页数下的的NFT展示 都是从第0页开始 */
   var [pageIndex,setPageIndex] =React.useState(0)
   var [pageIndex2,setPageIndex2] =React.useState(0)
+  var pageEnd =React.useRef(99999)
+  var pageEnd2 =React.useRef(99999)
   var [knapsackSelection,setKnapsackSelection] =React.useState(1)
+  var [turnRightFlag,setTurnRightFlag] =React.useState(true)
+  var [turnRight2Flag,setTurnRight2Flag] =React.useState(true)
 
   /****当图片不足以绘制的时候，需要一定的时间来重新填充LENS的帖子，然后填充背包，所以希望此时用户不要点击翻页 */
   const [pageFlag,setPageFlag] =React.useState(true)
@@ -251,6 +260,7 @@ function AddCollectionComponent({addCollectionComponentProps}){
   /**************切换背包时候的状态变化 */
   const [postFlag,setPostFlag] =React.useState(true)
   const [collectionFlag,setCollectionFlag] =React.useState(false)
+  /****************************** */
   function cancelPrompt(){
     console.log('cancel')
   }
@@ -270,6 +280,7 @@ function AddCollectionComponent({addCollectionComponentProps}){
   /********************************装填出版物，获取个人在LENS服务器上的帖子，并生成数组****************************************/
   //这里的index用来表示，是重置出版物，还是获取下一个出版物，index 值为0或者1,0表示重置，重新装填一遍。1表示获取下次出版物并装填
   async function fetchPublications(index){
+    console.log(addCollectionComponentProps.myProfile)
     addCollectionComponentProps.setLoadingFlag(true)
     if(addCollectionComponentProps.myProfile){
       try {
@@ -279,8 +290,13 @@ function AddCollectionComponent({addCollectionComponentProps}){
           variables:{id:profileId,limit:12,publicationTypes:['POST','MIRROR'],cursor:dataRef.current.cursor[index]}
         })
         let myPublications ={ ...userPublications.data.publications}
-        // console.log(myPublications)
-
+        /******如果用户本次fetch的帖子小于12，说明用户没有更多帖子了，需要将fetch的开关关闭 */
+     
+        console.log(myPublications)
+        if(myPublications.items.length<12){
+          console.log('用户没有更多帖子了')
+          fetchPubFlag.current=false
+        }
         dataRef.current.cursor = [myPublications.pageInfo.prev,myPublications.pageInfo.next]
         // console.log(dataRef)
         /*****通过Promise.all 和map函数 重新得到一个简化过滤后的 帖子数组 publicationsData，将LENS服务器上不可读的图片地址转换成https图片地址 开************/
@@ -302,6 +318,7 @@ function AddCollectionComponent({addCollectionComponentProps}){
           }
           return publish
         }))
+        // console.log(publicationsData)
         /*****通过Promise.all 和map函数 重新得到一个简化过滤后的 帖子数组 publicationsData 将LENS服务器上不可读的图片地址转换成https图片地址 关*************/
         /*****通过map函数 得到一个 非帖子 纯图片数组publicationsPictures 开*************/
         let publicationsPictures=[]
@@ -314,7 +331,6 @@ function AddCollectionComponent({addCollectionComponentProps}){
             publicationsPictures.push(temObj)
           }
         })
-        // console.log(publicationsPictures)
          /*****通过map函数 得到一个 非帖子 纯图片数组publicationsPictures 关*************/
          /*******如果index == 1  fetchPublications(1)那么出版物数组将被连更，否则用fetchPublications(0)，出版物将被重置*/       
         if(index == 1){
@@ -323,6 +339,7 @@ function AddCollectionComponent({addCollectionComponentProps}){
         }else{
           dataRef.current.pictures=publicationsPictures
         }
+        console.log(dataRef.current.pictures)
         //第二步装填第一种类型背包1，出版物相关图片：
         fetchKnapsack(1) 
 
@@ -338,6 +355,7 @@ function AddCollectionComponent({addCollectionComponentProps}){
   }
   /****************获取个人在LENS服务器上的所有收藏品，并生成图片数组 *******************************/
   async function fetchCollections(index){
+    console.log('正在装在收藏品')
     addCollectionComponentProps.setLoadingFlag(true)
     if(addCollectionComponentProps.myProfile){
       try {
@@ -348,9 +366,13 @@ function AddCollectionComponent({addCollectionComponentProps}){
           variables:{address:address,limit:12,publicationTypes:['POST'],cursor:dataRefCollections.current.cursor[index]}
         })
         let myCollections ={ ...userCollections.data.publications}
-        // console.log(myCollections)
-
+        if(myCollections.items.length<12){
+          console.log('用户没有更多收藏了')
+          fetchColFlag.current=false
+        }
         dataRefCollections.current.cursor = [myCollections.pageInfo.prev,myCollections.pageInfo.next]
+        // console.log(dataRefCollections.current.cursor)
+        // console.log(myCollections.pageInfo.prev)
         // console.log(myCollections.pageInfo.next)
         let collectionsData = await Promise.all(myCollections.items.map(async collectionInfo => {
           let collection = {}
@@ -369,6 +391,7 @@ function AddCollectionComponent({addCollectionComponentProps}){
           }
           return collection
         }))
+        // console.log(collectionsData)
         let collectionsPictures=[]
         collectionsData.map(post =>{
           for(let i=0;i<post.imgUrl.length;i++){
@@ -386,6 +409,7 @@ function AddCollectionComponent({addCollectionComponentProps}){
         }else{
           dataRefCollections.current.pictures=collectionsPictures
         }
+        console.log(dataRefCollections.current.pictures)
         fetchKnapsack(2)   //填充背包类型2，所有收藏品的背包
       } catch (err) {
         console.log({ err })
@@ -406,10 +430,10 @@ function AddCollectionComponent({addCollectionComponentProps}){
       }
       // console.log(pictures[0].src)
 
-      const searchData = await addCollectionComponentProps.searchUser(addCollectionComponentProps.myProfile.name)
+      const searchData = await addCollectionComponentProps.searchUser(addCollectionComponentProps.myProfile.handle)
       // addCollectionComponentProps.setLoadingFlag(false)
       if(searchData.data.length>0){
-        console.log('找到了用户')
+        // console.log('找到了用户')
         // console.log(searchData)
         let data = JSON.parse(searchData.data[0].data)
         // console.log(data)
@@ -424,7 +448,7 @@ function AddCollectionComponent({addCollectionComponentProps}){
         let imgAllBeUseLength =imgAllBeUsed.length
         /********图片是否被选中过处理函数 */
           if(imgAllBeUseLength >0 && pictures.length > 0 ){
-            // console.log('用户添加过图片/创建过图册')
+            // console.log('用户创建过图册')
               for(let i=0;i<pictures.length;i++){
                 for(let j=0;j<imgAllBeUseLength;j++){
                     // console.log(pictures[i].src)
@@ -438,8 +462,9 @@ function AddCollectionComponent({addCollectionComponentProps}){
                     }
                 }
               }
-              if(pictures.length>=12){
+              if(pictures.length >= 12){
                   reloadCount.current =0
+                  reloadCollectionsCount.current =0
                 // console.log('图片数量满足绘制001')
                 addCollectionComponentProps.setLoadingFlag(false)
                 if(knapsackIndex == 1 ){
@@ -453,26 +478,43 @@ function AddCollectionComponent({addCollectionComponentProps}){
               }else{
                 // console.log('图片数量不满足绘制，需要重新装填出版物002')
                 if(reloadCount.current>5){
-                  alert('图片数量不满足绘制003') 
+                  console.log('图片数量不满足绘制 POST 003') 
+                  addCollectionComponentProps.setLoadingFlag(false)
+                  return false
+                }
+                if(reloadCollectionsCount.current>5){
+                  console.log('图片数量不满足绘制 Collection 003') 
                   addCollectionComponentProps.setLoadingFlag(false)
                   return false
                 }
                 if(knapsackIndex == 1){
-                  fetchPublications(1)
-                  setPageFlag(false)
-                  reloadCount.current ++
+                  if(fetchPubFlag.current == false){
+                    addCollectionComponentProps.setLoadingFlag(false)
+                    drawKnapsack(1)
+                    setPageFlag(true)
+                  }else{
+                    fetchPublications(1)
+                    setPageFlag(false)
+                    reloadCount.current ++
+                  }
                 }else{
-                  fetchCollections(1)
-                  setPageFlag2(false)
-                  reloadCount.current ++
+                  if(fetchColFlag.current == false){
+                    addCollectionComponentProps.setLoadingFlag(false)
+                    drawKnapsack(2)
+                    setPageFlag2(true)
+                  }else{
+                    fetchCollections(1)
+                    setPageFlag2(false)
+                    reloadCollectionsCount.current ++
+                  }
                 }
-
               }
           }else{
-            console.log('用户还未添加过图片到我们服务器')
-            if(pictures.length>=12){
+            console.log('用户未创建过图册')
+            if(pictures.length >= 12){
               reloadCount.current =0
-              // console.log('图片数量满足绘制004')
+              reloadCollectionsCount.current = 0
+              console.log('图片数量满足绘制004')
               addCollectionComponentProps.setLoadingFlag(false)
               if(knapsackIndex == 1){
                 setPageFlag(true)
@@ -483,19 +525,38 @@ function AddCollectionComponent({addCollectionComponentProps}){
               }
               console.log(pictures)
             }else{
+              // console.log(reloadCollectionsCount)
               // console.log('图片数量不满足绘制,需要重新装填出版物005')
               if(reloadCount.current>5){
-                alert('图片数量不满足绘制') 
-                // console.log('装填次数太多依旧不满足') 
+                // alert('图片数量不满足绘制005') 
+                console.log('装填次数太多依旧不满足POST') 
+                addCollectionComponentProps.setLoadingFlag(false)
+                return false
+              }
+              if(reloadCollectionsCount.current>5){
+                // alert('图片数量不满足绘制005') 
+                console.log('装填次数太多依旧不满足 Collection') 
                 addCollectionComponentProps.setLoadingFlag(false)
                 return false
               }
               if(knapsackIndex == 1){
-                fetchPublications(1)
-                reloadCount.current ++
+                if(fetchPubFlag.current == false){
+                  addCollectionComponentProps.setLoadingFlag(false)
+                  drawKnapsack(1)
+                  setPageFlag(true)
+                }else{
+                  fetchPublications(1)
+                  reloadCount.current ++
+                }
               }else{
-                fetchCollections(1)
-                reloadCount.current ++
+                if(fetchColFlag.current == false){
+                  addCollectionComponentProps.setLoadingFlag(false)
+                  drawKnapsack(2)
+                  setPageFlag2(true)
+                }else{
+                  fetchCollections(1)
+                  reloadCollectionsCount.current ++
+                }
               }
             }
           }
@@ -527,15 +588,16 @@ function AddCollectionComponent({addCollectionComponentProps}){
       }
  
     }else{
+      console.log(pictures)
       // console.log('当前数组无内容')
-      if(pictures.length >=12 ){
-        // console.log(temparr.length)
-        // console.log(pictures)
-        // console.log('缓存数组图片大于12张,正在制作并绘制背包的12张图片006')
+      if(pictures.length >= 12){
         let groupA =pictures.splice(0,4)
         let groupB =pictures.splice(0,4)
         let groupC =pictures.splice(0,4)
         temparr[temIndex]=[groupA,groupB,groupC]
+        // console.log(temparr.length)
+        // console.log(pictures)
+        // console.log('缓存数组图片大于12张,正在制作并绘制背包的12张图片006')
         // console.log(temparr)
         if(knapsackIndex == 1){
           setKnapsackPictures(temparr)
@@ -546,13 +608,33 @@ function AddCollectionComponent({addCollectionComponentProps}){
         }
       }else{
         console.log('图片不足以制作并绘制007')
-        // index--
+        let groupA =pictures.splice(0,4)
+        let groupB =pictures.splice(0,4)
+        let groupC =pictures.splice(0,4)
+        temparr[temIndex]=[groupA,groupB,groupC]
         if(knapsackIndex == 1){
-          fetchPublications(1)
-          setPageFlag(false)
+          if(fetchPubFlag.current == false){
+            console.log('绘制不足12张的图片')
+            setKnapsackPictures(temparr)
+            setPageIndex(temIndex)
+            setTurnRightFlag(false)
+            pageEnd.current=temIndex
+          }else{
+            fetchPublications(1)
+            setPageFlag(false)
+
+          }
         }else{
-          fetchCollections(1)
-          setPageFlag2(false)
+          if(fetchColFlag.current == false){
+            setKnapsackPictures2(temparr)
+            setPageIndex2(temIndex)
+            setTurnRight2Flag(false)
+            pageEnd2.current=temIndex
+          }else{
+            fetchCollections(1)
+            setPageFlag2(false)
+
+          }
         }
       }
 
@@ -562,6 +644,7 @@ function AddCollectionComponent({addCollectionComponentProps}){
     if(pageIndex <= 0){
       alert('当前已经是第一页')
     }else{
+      setTurnRightFlag(true)
       e.stopPropagation() //阻止冒泡事件
       // console.log('用户想看上一页')
       pageIndex--
@@ -573,6 +656,7 @@ function AddCollectionComponent({addCollectionComponentProps}){
     if(pageIndex2 <= 0){
       alert('当前已经是第一页')
     }else{
+      setTurnRight2Flag(true)
       e.stopPropagation() //阻止冒泡事件
       // console.log('用户想看上一页')
       pageIndex2--
@@ -581,22 +665,30 @@ function AddCollectionComponent({addCollectionComponentProps}){
     }
   }
   function turnRight(e){
-    // console.log('你正在使用post的翻页')
-    e.stopPropagation() //阻止冒泡事件
-    // console.log('用户想看下一页')
-    pageIndex++
-    // pageIndex++
-    console.log('当前页数'+pageIndex)
-    drawKnapsack(1)
+    if(pageIndex >= pageEnd.current){
+      alert('当前是最后一页')
+    }else{
+      // console.log('你正在使用post的翻页')
+      e.stopPropagation() //阻止冒泡事件
+      // console.log('用户想看下一页')
+      pageIndex++
+      // pageIndex++
+      console.log('当前页数'+pageIndex)
+      drawKnapsack(1)
+    }
   }
   function turnRight2(e){
-    // console.log('你正在使用collection的翻页')
-    e.stopPropagation() //阻止冒泡事件
-    // console.log('用户想看下一页')
-    pageIndex2++
-    // pageIndex++
-    console.log('当前页数'+pageIndex2)
-    drawKnapsack(2)
+    if(pageIndex2 >= pageEnd2.current){
+      alert('当前是最后一页')
+    }else{
+      // console.log('你正在使用collection的翻页')
+      e.stopPropagation() //阻止冒泡事件
+      // console.log('用户想看下一页')
+      pageIndex2++
+      // pageIndex++
+      console.log('当前页数'+pageIndex2)
+      drawKnapsack(2)
+    }
   }
   function ImgClick(e,groupIndex,itemIndex,pictureItem){
     // console.log(e)
@@ -705,6 +797,7 @@ function AddCollectionComponent({addCollectionComponentProps}){
     setCollectionFlag(false)
   }
   function switchCollected(){
+    console.log('switchC')
     setKnapsackSelection(2)
     setPostFlag(false)
     setCollectionFlag(true)
@@ -735,7 +828,7 @@ function AddCollectionComponent({addCollectionComponentProps}){
     }
     if(dataCreateBrochure.current.brochure.length>0){
       console.log('我准备将你的册子写入数据库了')
-      let user =addCollectionComponentProps.myProfile.name
+      let user =addCollectionComponentProps.myProfile.handle
       const searchData = await addCollectionComponentProps.searchUser(user)
       // console.log(searchData)
       if(searchData.data.length>0){
@@ -800,7 +893,7 @@ function AddCollectionComponent({addCollectionComponentProps}){
     }
     if(dataCreateBrochure.current.brochure.length>0){
       console.log('我准备开始修改你的册子了')
-      let user =addCollectionComponentProps.myProfile.name
+      let user =addCollectionComponentProps.myProfile.handle
       const searchData = await addCollectionComponentProps.searchUser(user)
       // console.log(searchData)
       if(searchData.data.length>0){
@@ -879,7 +972,7 @@ function AddCollectionComponent({addCollectionComponentProps}){
           {/* <div onClick={turnLeft} className={styles.part3_turnleft}>←</div> */}
           <div className={styles.part3_imgContainer}>
             {
-              knapsackSelection == 1 && knapsackPictures[pageIndex]&& knapsackPictures[pageIndex].map((knapsackPicturesGroup,groupIndex)  =>{
+              knapsackSelection == 1 && knapsackPictures[pageIndex] && knapsackPictures[pageIndex].map((knapsackPicturesGroup,groupIndex)  =>{
                 return <div key={groupIndex} className={styles.imgGroup}>
                   {
                     knapsackPicturesGroup.map((pictureItem,itemIndex) =>{
@@ -893,7 +986,7 @@ function AddCollectionComponent({addCollectionComponentProps}){
               })
             }
             {
-              knapsackSelection == 2 && knapsackPictures2[pageIndex2]&& knapsackPictures2[pageIndex2].map((knapsackPictures2Group,groupIndex)  =>{
+              knapsackSelection == 2 && knapsackPictures2[pageIndex2] && knapsackPictures2[pageIndex2].map((knapsackPictures2Group,groupIndex)  =>{
                 return <div key={groupIndex} className={styles.imgGroup}>
                   {
                     knapsackPictures2Group.map((pictureItem,itemIndex) =>{
@@ -914,14 +1007,14 @@ function AddCollectionComponent({addCollectionComponentProps}){
             pageFlag && knapsackSelection == 1 && <div className={styles.part4_PageBtn}>
             <div onClick={turnLeft}  className={styles.part4_PageBtn_turnLeft}></div>
             <div className={styles.part4_PageBtn_PageInfo}></div>
-            <div onClick={turnRight} className={styles.part4_PageBtn_turnRight}></div>
+            {turnRightFlag && <div onClick={turnRight} className={styles.part4_PageBtn_turnRight}></div>}
             </div>
           }
           {
             pageFlag2 && knapsackSelection == 2 && <div className={styles.part4_PageBtn}>
             <div onClick={turnLeft2} className={styles.part4_PageBtn_turnLeft}></div>
             <div className={styles.part4_PageBtn_PageInfo}></div>
-            <div onClick={turnRight2} className={styles.part4_PageBtn_turnRight}></div>
+            {turnRight2Flag && <div onClick={turnRight2} className={styles.part4_PageBtn_turnRight}></div>}
             </div>            
           }
           <div className={styles.kindsOfKnapsack}>
@@ -1052,7 +1145,7 @@ function BodyBCollectionFull({bodyBCollectionFullProps}){
     /****删除并保存 */
     temArr.splice(delNum,1)
     // console.log(temArr)
-    let user =bodyBCollectionFullProps.myProfile.name
+    let user =bodyBCollectionFullProps.myProfile.handle
     const searchData = await bodyBCollectionFullProps.searchUser(user)
     // console.log(searchData)
     if(searchData.data.length>0){
@@ -1251,7 +1344,7 @@ const createUser = async (name,value) => {
     }),
   });
   const data = await res.json()
-  // console.log(data)
+  console.log(data)
   setLoadingFlag(false)
 }
 const searchUser = async (name) => {

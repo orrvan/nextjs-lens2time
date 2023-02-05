@@ -12,6 +12,7 @@ export default async function addUser(req, res) {
     console.log('CONNECTED TO MONGO');
 
     console.log('CREATING DOCUMENT');
+    console.log(req.body)
     const data = await User.create(req.body);
     console.log('CREATED DOCUMENT');
 
