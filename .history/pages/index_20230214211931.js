@@ -36,11 +36,11 @@ export default function Home({data}) {
     <div className={styles.header}>
       <div className={styles.logo_LensView}>Lenstime</div>
       <div className={styles.options}>
-        {clickIndexFlag[0] && <div style={{width:"48.25%",color:'rgba(0, 0, 0, 1)',borderRight:'1px solid rgba(187,187,187,0.5)'}}>Recommendation</div>} 
-        {clickIndexFlag[1] && <div style={{width:'28.5%' ,color:'rgba(0, 0, 0, 1)',borderRight:'1px solid rgba(187,187,187,0.5)'}}>Interests</div>}        
+        {clickIndexFlag[0] && <div style={{width:"48.25%",color:'rgba(0, 0, 0, 1)',borderRight:'1px solid rgba(187,187,187,1)'}}>Recommendation</div>} 
+        {clickIndexFlag[1] && <div style={{width:'28.5%' ,color:'rgba(0, 0, 0, 1)',borderRight:'1px solid rgba(187,187,187,1)'}}>Interests</div>}        
         {clickIndexFlag[2] &&<div style={{width:'23.25%',color:'rgba(0, 0, 0, 1)'}}>Create</div>}
-        {!clickIndexFlag[0] && <div style={{width:"48.25%",color:'rgba(190, 190, 190, 1)',borderRight:'1px solid rgba(187,187,187,0.5)'}}>Recommendation</div>} 
-        {!clickIndexFlag[1] && <div style={{width:'28.5%' ,color:'rgba(190, 190, 190, 1)', borderRight:'1px solid rgba(187,187,187,0.5)'}}>Interests</div>}        
+        {!clickIndexFlag[0] && <div style={{width:"48.25%",color:'rgba(190, 190, 190, 1)',borderRight:'1px solid rgba(187,187,187,1)'}}>Recommendation</div>} 
+        {!clickIndexFlag[1] && <div style={{width:'28.5%' ,color:'rgba(190, 190, 190, 1)', borderRight:'1px solid rgba(187,187,187,1)'}}>Interests</div>}        
         {!clickIndexFlag[2] &&<div style={{width:'23.25%',color:'rgba(190, 190, 190, 1)'}}>Magic</div>}
       </div>
       <div></div>
@@ -52,14 +52,14 @@ export default function Home({data}) {
       
       </Link> */}
       <div className={styles.myHome}>
-        <Link style={{display:'block',width:'100%',color:'white',fontSize:'0.6rem',lineHeight:'41px'}}  target="_blank"  href={`/home`}> I have a lens handle </Link>
-        {/* <div className={styles.remind}></div>
+        <p style={{fontSize:'0.7rem',lineHeight:'41px'}}>I have a lens handle</p>
+        <div className={styles.remind}></div>
         {
         address && token && headerProps.myProfile && <div className={styles.h_avatarUrl}>
           <img src={ headerProps.myProfile.avatarUrl} alt={'当前网络不可用'} />
         </div>
         }
-        <div className={styles.myHomeBtn}></div> */}
+        <div className={styles.myHomeBtn}></div>
       </div>
     </div>
     <div className={styles.body1}>

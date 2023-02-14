@@ -63,7 +63,6 @@ function Header({headerProps}){
       /************获取个人在我们服务器上的信息 开 *******************************/
       
       let user =mydefalutProfile.handle
-      let avatarUrl =mydefalutProfile.avatarUrl
       //用户加载的loading可以在这里设计
       headerProps.setLoadingFlag(true)
       const searchData = await headerProps.searchUser(user)
@@ -86,7 +85,7 @@ function Header({headerProps}){
           let value =JSON.stringify({
           brochures:[]})
           headerProps.setLoadingFlag(true)
-          headerProps.createUser(user,value,avatarUrl)
+          headerProps.createUser(user,value)
           // window.localStorage.setItem(user,value)
           console.log('已新建用户')
         }
@@ -256,12 +255,12 @@ function AddCollectionComponent({addCollectionComponentProps}){
     brochureName:addCollectionComponentProps.brochureSelected.current.brochureName,
     brochureTag:addCollectionComponentProps.brochureSelected.current.brochureTag,
     brochure:[],
-    likes:addCollectionComponentProps.brochureSelected.current.likes,
-    content:addCollectionComponentProps.brochureSelected.current.content,
-    slots:addCollectionComponentProps.brochureSelected.current.slots,
-    bgImg:addCollectionComponentProps.brochureSelected.current.bgImg,
-    views:addCollectionComponentProps.brochureSelected.current.views,
-    id:addCollectionComponentProps.brochureSelected.current.id
+    brochureName:addCollectionComponentProps.brochureSelected.current.likes,
+    brochureName:addCollectionComponentProps.brochureSelected.current.content,
+    brochureName:addCollectionComponentProps.brochureSelected.current.slots,
+    brochureName:addCollectionComponentProps.brochureSelected.current.bgImg,
+    brochureName:addCollectionComponentProps.brochureSelected.current.views,
+    brochureName:addCollectionComponentProps.brochureSelected.current.id
   })
 
   /********pageIndex和pageIndex2 分别用来存储俩个背包在对应页数下的的NFT展示 都是从第0页开始 */
@@ -830,7 +829,7 @@ function AddCollectionComponent({addCollectionComponentProps}){
     dataCreateBrochure.current.brochure = [].concat(brochure)
     dataCreateBrochure.current.category='Image'
     let time =new Date().getTime()
-    dataCreateBrochure.current.id =addCollectionComponentProps.myProfile.handle+'T'+time
+    dataCreateBrochure.current.id =addCollectionComponentProps.myProfile.handle+time
     dataCreateBrochure.current.bgImg =''
     dataCreateBrochure.current.likes =0
     dataCreateBrochure.current.content =''
@@ -1373,10 +1372,9 @@ export default function Home() {
   const [loadingFlag,setLoadingFlag] = React.useState(false)
   /*******************************操作我们数据库的相关函数 开 */
 
-const createUser = async (name,value,avatarUrl) => {
+const createUser = async (name,value) => {
   const userName = name
   const userData = value
-  const userAvatarUrl = avatarUrl
   const res = await fetch('/api/add', {
     method: 'POST',
     headers: {
@@ -1385,7 +1383,6 @@ const createUser = async (name,value,avatarUrl) => {
     body: JSON.stringify({
       name: userName,
       data: userData,
-      avatarUrl:userAvatarUrl
     }),
   });
   const data = await res.json()

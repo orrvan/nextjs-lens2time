@@ -52,7 +52,7 @@ export default function Home({data}) {
       
       </Link> */}
       <div className={styles.myHome}>
-        <Link style={{display:'block',width:'100%',color:'white',fontSize:'0.6rem',lineHeight:'41px'}}  target="_blank"  href={`/home`}> I have a lens handle </Link>
+        <Link style={{display:'block',width:'100%',color:'white',fontSize:'0.6rem',lineHeight:'41px'}}  target="_blank"  href={``}> I have a lens handle </Link>
         {/* <div className={styles.remind}></div>
         {
         address && token && headerProps.myProfile && <div className={styles.h_avatarUrl}>

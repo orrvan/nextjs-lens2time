@@ -2,7 +2,6 @@ import React, { useEffect } from 'react'
 import styles from '../styles/Home.module.css'
 import { ethers } from 'ethers'
 import { client, challenge, authenticate,defaultProfile,publications,collections} from '../api'
-import Link from 'next/link'
 // import Draggable, {DraggableCore} from 'react-draggable'; // Both at the same time
 // import { Resizable } from 'react-resizable';
 // import { ResizableBox } from 'react-resizable';
@@ -63,7 +62,6 @@ function Header({headerProps}){
       /************获取个人在我们服务器上的信息 开 *******************************/
       
       let user =mydefalutProfile.handle
-      let avatarUrl =mydefalutProfile.avatarUrl
       //用户加载的loading可以在这里设计
       headerProps.setLoadingFlag(true)
       const searchData = await headerProps.searchUser(user)
@@ -86,7 +84,7 @@ function Header({headerProps}){
           let value =JSON.stringify({
           brochures:[]})
           headerProps.setLoadingFlag(true)
-          headerProps.createUser(user,value,avatarUrl)
+          headerProps.createUser(user,value)
           // window.localStorage.setItem(user,value)
           console.log('已新建用户')
         }
@@ -181,17 +179,7 @@ function BodyACollection({bodyACollectionProps}){
   // console.log(3)
   function creatBrochure(){
     // console.log('正在创建册子')
-    bodyACollectionProps.brochureSelected.current={
-      brochure:[],
-      brochureTag:[],
-      brochureName:null,
-      id:'',
-      likes:0,
-      views:0,
-      slots:{},
-      content:'',
-      bgImg:'',
-    }
+    bodyACollectionProps.brochureSelected.current={brochure:[],brochureTag:[]}
     bodyACollectionProps.setaddCollectionComponentFlag(true)
     bodyACollectionProps.setAddOrEditCollectionComponentFlag(true)
   }
@@ -252,17 +240,7 @@ function AddCollectionComponent({addCollectionComponentProps}){
   const fetchPubFlag =React.useRef(true)
   const fetchColFlag =React.useRef(true)
   /*********用来收集创建册子的表单数据 ******************************/
-  const dataCreateBrochure =React.useRef({
-    brochureName:addCollectionComponentProps.brochureSelected.current.brochureName,
-    brochureTag:addCollectionComponentProps.brochureSelected.current.brochureTag,
-    brochure:[],
-    likes:addCollectionComponentProps.brochureSelected.current.likes,
-    content:addCollectionComponentProps.brochureSelected.current.content,
-    slots:addCollectionComponentProps.brochureSelected.current.slots,
-    bgImg:addCollectionComponentProps.brochureSelected.current.bgImg,
-    views:addCollectionComponentProps.brochureSelected.current.views,
-    id:addCollectionComponentProps.brochureSelected.current.id
-  })
+  const dataCreateBrochure =React.useRef({brochureName:addCollectionComponentProps.brochureSelected.current.brochureName,brochureTag:addCollectionComponentProps.brochureSelected.current.brochureTag,brochure:[]})
 
   /********pageIndex和pageIndex2 分别用来存储俩个背包在对应页数下的的NFT展示 都是从第0页开始 */
   var [pageIndex,setPageIndex] =React.useState(0)
@@ -829,13 +807,6 @@ function AddCollectionComponent({addCollectionComponentProps}){
     // console.log(dataCreateBrochure)
     dataCreateBrochure.current.brochure = [].concat(brochure)
     dataCreateBrochure.current.category='Image'
-    let time =new Date().getTime()
-    dataCreateBrochure.current.id =addCollectionComponentProps.myProfile.handle+'T'+time
-    dataCreateBrochure.current.bgImg =''
-    dataCreateBrochure.current.likes =0
-    dataCreateBrochure.current.content =''
-    dataCreateBrochure.current.views =0
-    dataCreateBrochure.current.slots={}
     const regexStr =/^[\u4e00-\u9fa5_a-zA-Z0-9]+$/
     if(dataCreateBrochure.current.brochureName && regexStr.test(dataCreateBrochure.current.brochureName)){
       console.log('册子名字没啥问题')
@@ -1266,23 +1237,17 @@ function BodyBCollectionFull({bodyBCollectionFullProps}){
       {
         bodyBCollectionFullProps.myBrochures.map((brochureItem,brochureIndex) =>{
           return <div key={brochureIndex} className={styles.brochureItem}>
-          <div className={styles.brochureBg}>
-            <img className={styles.brochureImg} src={brochureItem.brochure[0].src}></img>
-            <Link target="_blank" style={{width:'6.1rem',height:'6.1rem',position:'absolute'}} href={`/atlas/${brochureItem.id}`}></Link>
+                  <div className={styles.brochureBg}>
+                    <img onClick={(e) =>{brochureClick(e,brochureItem,brochureIndex)}} className={styles.brochureImg} src={brochureItem.brochure[0].src}></img>
+                  </div>
+                  <div className={styles.brochureContral}>
+                      <div onClick={(e) =>{brochureDelete(e,brochureItem,brochureIndex)}}  className={styles.brochureContralDel}></div>
+                      <div onClick={(e) =>{brochureEdit(e,brochureItem,brochureIndex)}}  className={styles.brochureContralEdit}></div>
+                      <div className={styles.brochureMediaShare}></div>
+                    </div>
+                  <div className={styles.brochureName}>{brochureItem.brochureName}</div>
           </div>
-          <div className={styles.brochureArea}>
-            <div>
-            {brochureItem.brochureName}
-            </div>
-            <div className={styles.brochureContral}>
-              <div onClick={(e) =>{}}  className={styles.brochureContralView}></div>                      
-              <div onClick={(e) =>{brochureDelete(e,brochureItem,brochureIndex)}}  className={styles.brochureContralDel}></div>
-              <div onClick={(e) =>{brochureEdit(e,brochureItem,brochureIndex)}}  className={styles.brochureContralEdit}></div>
-              <div className={styles.brochureMediaShare}></div>
-            </div>
-          </div>
-  </div>
-})
+        })
       }
       {
         openBrochureFlag ==true && <div className={styles.openBrochureContainer}>
@@ -1355,17 +1320,7 @@ export default function Home() {
   const [addOrEditCollectionComponentFlag,setAddOrEditCollectionComponentFlag] = React.useState(true)
   /****册子必须是全局变量，因为它要在好几个组件中显示*/
   const [myBrochures,setMyBrochures] =React.useState([])
-  var brochureSelected =React.useRef({
-    brochure:[],
-    brochureTag:[],
-    brochureName:null,
-    id:'',
-    likes:0,
-    views:0,
-    slots:{},
-    content:'',
-    bgImg:'',
-  })
+  var brochureSelected =React.useRef({brochure:[],brochureTag:[],brochureName:null})
   /*********拖拽必须是全局变量，否则在组件每次渲染时都会重置状态 */
   const [dragDisabled,setDragDisabled] =React.useState(false)
 
@@ -1373,10 +1328,9 @@ export default function Home() {
   const [loadingFlag,setLoadingFlag] = React.useState(false)
   /*******************************操作我们数据库的相关函数 开 */
 
-const createUser = async (name,value,avatarUrl) => {
+const createUser = async (name,value) => {
   const userName = name
   const userData = value
-  const userAvatarUrl = avatarUrl
   const res = await fetch('/api/add', {
     method: 'POST',
     headers: {
@@ -1385,7 +1339,6 @@ const createUser = async (name,value,avatarUrl) => {
     body: JSON.stringify({
       name: userName,
       data: userData,
-      avatarUrl:userAvatarUrl
     }),
   });
   const data = await res.json()

@@ -63,7 +63,6 @@ function Header({headerProps}){
       /************获取个人在我们服务器上的信息 开 *******************************/
       
       let user =mydefalutProfile.handle
-      let avatarUrl =mydefalutProfile.avatarUrl
       //用户加载的loading可以在这里设计
       headerProps.setLoadingFlag(true)
       const searchData = await headerProps.searchUser(user)

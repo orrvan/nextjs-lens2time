@@ -46,7 +46,6 @@ background-color: rgba(255, 255, 255, 1);
     align-items: center;
     background-color: rgba(245, 245, 245, 1);
     border-radius: 1rem;
-    font-size: 0.715rem;
 }
 .searchIcon{
     margin-left: 0.3rem;
@@ -68,10 +67,6 @@ background-color: rgba(255, 255, 255, 1);
     background: black;
     color: white;
     border-radius: 1rem;
-}
-.myHome:hover{
-    opacity: 0.7;
-    cursor:pointer;
 }
 .body1{
 height:335px;
