@@ -12,7 +12,16 @@ export default async function getUser(req, res) {
     console.log('CONNECTED TO MONGO');
 
     console.log('SEARCHING DOCUMENT');
-    const data = await User.find(req.body);
+    let data
+    console.log(req.body)
+    if(req.body.name != 'allUsers'){
+      console.log('1111')
+      data = await User.find(req.body);
+    }else{
+      console.log('2222')
+      data = await User.find();
+    }
+
     console.log('SEARCHING DOCUMENT');
 
     res.json({ data });

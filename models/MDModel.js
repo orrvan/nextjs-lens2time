@@ -6,6 +6,11 @@ const lens2timeUser = new Schema({
     required:true,
     unique:true
   },
+  avatarUrl:{
+    type: String,
+    required: false,
+    unique: false,
+  },
   data: {
     type: String,
     required: false,
