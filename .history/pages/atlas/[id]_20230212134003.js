@@ -156,7 +156,7 @@ export async function getServerSideProps(context){
   // console.log(request)
   // console.log('gaga')
   let user =tempArr[0]
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/search`, {
+  const res = await fetch(`${process.env.API_SEARCH_URL}/`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

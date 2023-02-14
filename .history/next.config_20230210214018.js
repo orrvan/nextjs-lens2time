@@ -10,4 +10,7 @@ module.exports = {
     nextConfig.experiments = { ...nextConfig.experiments, topLevelAwait: true }
     return nextConfig
   },
+  env: {
+    API_SEARCH_URL: 'http://localhost:3000/api/search'
+  },
 }
