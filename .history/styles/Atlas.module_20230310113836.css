@@ -1,0 +1,234 @@
+.cotainer{
+    flex: 1 1 0;
+    width: 100%;
+    /* height:100%; */
+    display: flex;
+    flex-flow: column nowrap;
+    /* justify-content: center; */
+    align-items: center;
+}
+.header{
+    height:80px;
+    width:100%;
+    display:flex;
+    flex-flow:row nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    line-height: 20px;
+    background-color: rgba(255, 255, 255, 1);
+}
+.h_blank1{
+width:3.5714rem;
+/* background:blue; */
+height:100%;
+}
+.h_menu{
+    width:79%;
+    /* background:yellow; */
+    height:100%;
+    display:flex;
+    flex-flow:row nowrap;
+    justify-content:flex-start;
+    align-items:center;
+}
+.div_atlas{
+    width:2.357rem;
+    border-right: 2px solid rgba(187, 187, 187, 0.5);
+    min-width: 60px;
+    text-align: center;
+}
+.div_brochureName{
+    width:2.357rem;
+    min-width: 60px;
+    text-align: center;
+}
+.info_atlas{
+    height: 16px;
+    color: rgba(0, 0, 0, 1);;
+    font-size: 0.5715rem;
+    line-height:16px;
+    font-family: SourceHanSansSC-regular;
+}
+.info_brochureName{
+height: 16px;
+color: rgba(190, 190, 190, 1);;
+font-size: 0.5715rem;
+line-height:16px;
+font-family: SourceHanSansSC-regular;
+}
+.body1{
+    height:335px;
+    width:100%;
+    background-image: url(../public/atlasBg.png); 
+    background-repeat: no-repeat;
+    background-position: 0% 52.5%;
+    background-size: cover;
+    background-attachment:scroll;
+    filter:brightness(0.9);
+    opacity: 0.8;
+    /* padding:0 3.5714rem; */
+}
+.body1Contanier{
+    height: 100%;
+    width: 90.5%;
+    margin: 0 auto;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+}
+.body1Info{
+    width: 24.429rem;
+    height: 9.8572rem;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+}
+.photoFrame{
+    width: 8.752rem;
+    height: 8.752rem;
+    background-image: url(../public/photoFrame.png); 
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+}
+.photoFrame img{
+    width: 5.3rem;
+    height: 5.3rem;
+    object-fit: cover;
+}
+.brochureInfo{
+    width: 8.752rem;
+    height: 8.752rem;
+    padding: 0.6429rem 0;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+    align-items: center;
+}
+.authorProfile{
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+}
+.authorProfile span{
+    font-size: 16px;
+    color: rgba(255, 255, 255, 1);
+    text-align: center;
+    line-height: 5.25rem;
+    font-family: PingFangSC-regular;
+}
+.goToMyProfile{
+    background-image: url(../public/rightArrow.png); 
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 0.5;
+    height: 0.5;
+}
+.body1Contral{
+    width: 2.5714rem;
+    height:9.8572rem;
+    display: flex;
+    flex-flow:column nowrap;
+    justify-content: flex-end;
+    align-items:center;
+}
+.body1Media{
+    width: 100%;
+    height: 1.1rem;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+}
+.likes{
+    background-image: url(../public/likes.png); 
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 1rem;
+    height: 1rem;
+}
+.share{
+    background-image: url(../public/atlasShare.png); 
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 1rem;
+    height: 1rem;
+}
+.body2{
+    height:733px;
+    width:100%;
+    /* background-image: url(../public/bodyAbg.jpg);  */
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+}
+.picturesStage{
+    width: 90.5%;
+    height: 100%;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    align-content: flex-start;
+    padding-top: 0.822rem;
+}
+.imgContanier{
+    width: 7.15rem;
+    height: 7.15rem;
+    margin: 0.643rem 0.3rem 0 0.3rem;
+}
+.imgContanier img{
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+}
+.imgContanier img:hover{
+    filter: brightness(0.5);
+    cursor:pointer;
+  }
+.goToLensBg{
+    position: absolute;
+    width: 2.4rem;
+    height: 1.29rem;
+    opacity: 0.4;
+    border-radius: 0px 66px 66px 0px;
+    background-color: rgba(0, 0, 0, 1);
+    bottom: 1rem;
+}
+.goToLens{
+    position: absolute;
+    bottom: 1.215rem;
+    left: 0.77rem;
+    width: 0.86rem;
+    height: 0.86rem;
+    background-image: url(../public/imgLink.png); 
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.goToLens a{
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+@media screen and (max-width:600px){
+    .header{
+        height: 60px;
+    }
+    .body1{
+        height: 177px;
+    }
+    .picturesStage{
+        justify-content: center;
+    }
+    .imgContanier{
+        width: 6.6rem;
+        height: 6.6rem;
+    }
+  }
