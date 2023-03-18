@@ -1,0 +1,321 @@
+.cotainer{
+    flex: 1 1 0;
+    width: 100%;
+    /* height:100%; */
+    display: flex;
+    flex-flow: column nowrap;
+    /* justify-content: center; */
+    align-items: center;
+}
+.header{
+    height:80px;
+    width:100%;
+    display:flex;
+    flex-flow:row nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    line-height: 20px;
+    background-color: rgba(255, 255, 255, 1);
+}
+.return{
+    width: 0.8rem;
+    height: 0.8rem;
+    background-image: url(../public/leftArrow.png); 
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.h_blank1{
+width:3.5714rem;
+/* background:blue; */
+height:100%;
+}
+.h_menu{
+    width:8.5rem;
+    /* background:yellow; */
+    height:100%;
+    display:flex;
+    flex-flow:row nowrap;
+    justify-content:flex-start;
+    align-items:center;
+    margin-left: 4rem;
+}
+.div_atlas{
+    text-align: center;
+}
+.div_brochureName{
+    text-align: center;
+}
+.info_atlas{
+    height: 16px;
+    color: rgba(0, 0, 0, 1);;
+    font-size: 0.5715rem;
+    line-height:16px;
+    font-family: SourceHanSansSC-regular;
+}
+.info_brochureName{
+height: 16px;
+text-align: center;
+color: rgba(190, 190, 190, 1);;
+font-size: 0.5715rem;
+line-height:16px;
+font-family: SourceHanSansSC-regular;
+}
+.body1{
+    height:335px;
+    width:100%;
+    background-image: url(../public/atlasBannerBg.png); 
+    background-repeat: no-repeat;
+    background-position: 0% 52.5%;
+    background-size: cover;
+    background-attachment:scroll;
+    filter:brightness(0.9);
+    opacity: 0.8;
+    /* padding:0 3.5714rem; */
+}
+.body1Music{
+    height:335px;
+    width:100%;
+    background-image: url(../public/playlistBannerBg.gif); 
+    background-repeat: no-repeat;
+    background-position: 0% 52.5%;
+    background-size: cover;
+    background-attachment:scroll;
+    filter:brightness(0.9);
+    opacity: 0.8;
+    /* padding:0 3.5714rem; */
+}
+.body1Contanier{
+    height: 100%;
+    width: 90.5%;
+    margin: 0 auto;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+}
+.body1Info{
+    width: 24.429rem;
+    height: 9.8572rem;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+}
+.photoFrame{
+    width: 8.752rem;
+    height: 8.752rem;
+    background-image: url(../public/photoFrame.png); 
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+}
+.photoFrame img{
+    width: 5.3rem;
+    height: 5.3rem;
+    object-fit: cover;
+}
+.musicFrame{
+    width: 10rem;
+    height: 10rem;
+    background-image: url(../public/musicFrame.png); 
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+}
+.musicFrame img{
+    width: 5rem;
+    height: 5rem;
+    object-fit: cover;
+    display: block;
+    border-radius: 50%;
+}
+.brochureInfo{
+    width: 9rem;
+    height: 8.752rem;
+    padding: 0.6429rem 0;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+    align-items: center;
+}
+.authorProfile{
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+    align-items: center;
+}
+.authorProfile span{
+    width: 5rem;
+    font-size: 16px;
+    color: rgba(255, 255, 255, 1);
+    text-align: center;
+    line-height: 1.7rem;
+    font-family: PingFangSC-regular;
+    margin-left: 0.1rem;
+}
+.goToMyProfile{
+    background-image: url(../public/rightArrow1.png); 
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 0.55rem;
+    height: 0.55rem;
+    margin-left: 0.1rem;
+}
+.goToMyProfile:hover{
+    cursor: pointer;
+}
+.goToMyProfile a{
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+.body1Contral{
+    width: 2.5714rem;
+    height:9.8572rem;
+    display: flex;
+    flex-flow:column nowrap;
+    justify-content: flex-end;
+    align-items:center;
+}
+.body1Media{
+    width: 100%;
+    height: 1.1rem;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+}
+.likes{
+    background-image: url(../public/likes.png); 
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 1rem;
+    height: 1rem;
+}
+.share{
+    background-image: url(../public/atlasShare.png); 
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 1rem;
+    height: 1rem;
+}
+.body2{
+    height:733px;
+    width:100%;
+    /* background-image: url(../public/bodyAbg.jpg);  */
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+    /* overflow:scroll; */
+}
+/* .body2::-webkit-scrollbar{
+    display: none;
+} */
+.picturesStage{
+    width: 90.5%;
+    height: 100%;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    align-content: flex-start;
+    padding-top: 0.822rem;
+}
+.imgContanier{
+    width: 7.15rem;
+    height: 7.15rem;
+    margin: 0.643rem 0.3rem 0 0.3rem;
+}
+.imgContanier img{
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+}
+.imgContanier img:hover{
+    filter: brightness(0.5);
+    cursor:pointer;
+  }
+.musicContanier{
+    width: 7.15rem;
+    height: 8.15rem;
+    margin: 0.643rem 0.3rem 0 0.3rem;
+}
+.musicContanier img{
+    width: 7.15rem;
+    height: 7.15rem;
+    display: block;
+    object-fit: cover;
+}
+.musicContanier span{
+    display: inline-block;
+    width: 7.15rem;
+    height: 1rem;
+    font-size: 0.5rem;
+    font-family: SourceHanSansSC-regular;
+    line-height: 1rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.audioPlayer{
+    width: 100%;
+    height: 100px;
+}
+.goToLensBg{
+    position: absolute;
+    width: 2.4rem;
+    height: 1.29rem;
+    opacity: 0.4;
+    border-radius: 0px 66px 66px 0px;
+    background-color: rgba(0, 0, 0, 1);
+    bottom: 1rem;
+}
+.goToLens{
+    position: absolute;
+    bottom: 1.215rem;
+    left: 0.77rem;
+    width: 0.86rem;
+    height: 0.86rem;
+    background-image: url(../public/lenster.png); 
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.goToLens a{
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+@media screen and (max-width:600px){
+    .header{
+        height: 60px;
+    }
+    .body1{
+        height: 177px;
+    }
+    .h_blank1{
+        width: 4.75%;
+    }
+    .h_menu{
+        margin-left: 1rem;
+    }
+    .body1Music{
+        height: 177px;
+    }
+    .picturesStage{
+        width: 21.6rem;
+    }
+    .authorProfile{
+        justify-content: space-between;
+    }
+    .imgContanier{
+        width: 6.6rem;
+        height: 6.6rem;
+    }
+  }

@@ -1,0 +1,636 @@
+.container{
+flex: 1 1 0;
+width: 100%;
+/* height:100%; */
+display: flex;
+flex-flow: column wrap;
+/* justify-content: center; */
+align-items: center;
+}
+.header{
+height:80px;
+width:100%;
+display:flex;
+flex-flow:row nowrap;
+justify-content: space-between;
+align-items: center;
+line-height: 20px;
+background-color: rgba(255, 255, 255, 1);
+}
+.h_login{
+    min-width:60px;
+    /****最小宽度乘以6/9 */
+    width:3.22rem;
+    /* height:100%; */
+    height: 32px;
+    line-height: 32px;
+    border-radius: 2px;
+    background-color: rgba(0, 0, 0);
+    color:rgba(255, 255, 255, 1);
+    font-size: 0.5715rem;
+    text-align: center;
+    /* font-family: Roboto; */
+    border: 1px solid rgba(0, 0, 0, 0.01);
+    font-weight:550;
+  }
+.h_login:hover{
+    opacity: 0.7;
+    cursor:pointer;
+}
+.h_avatarUrl{
+    height: 1.8rem;
+    min-width: 40px;
+    min-height: 40px;
+    width: 1.8rem;
+    border: 1px solid #f1f1f1;
+    border-radius: 50%;
+    overflow: hidden;
+}
+.reminder{
+    width: 22px;
+    height: 22px;
+    background-image: url(../public/reminder.png); 
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin-right: 0.6rem;
+  }
+.downArrow{
+    width: 16px;
+    height: 16px;
+    background-image: url(../public/downArrow.png); 
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin-left: 0.5rem;
+}
+.downArrow1{
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background-image: url(../public/downArrow1.png); 
+    background-repeat: no-repeat;
+    background-size: cover;
+    top: 4px;
+    right: -2px;
+}
+.downArrow1:hover{
+    opacity: 0.7;
+    cursor:pointer;
+}
+.h_avatarUrl img{
+    width: 1.8rem;
+    height: 1.8rem;
+    min-width: 40px;
+    min-height: 40px;
+}
+.logo_LensView{
+    width: 9%;
+    min-width:84.67px;
+    height: 41px;
+    margin-left: 7%;
+    font-family: SourceHanSansSC-regular;
+    line-height: 41px;
+    font-weight:600;
+}
+.options{
+    width: 23.9%;
+    height: 24px;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    font-family: SourceHanSansSC-regular;
+    text-align: center;
+    /* margin-top: 0.4rem; */
+}
+.recommendation{
+    width:48.25%;
+    opacity: 0.5;
+    border-right:1px solid rgba(187,187,187,0.5);
+}
+.recommendationActive{
+    width:48.25%;
+    color:rgba(0, 0, 0, 1);
+    border-right:1px solid rgba(187,187,187,0.5);
+}
+.interests{
+    width:28.5%;
+    opacity: 0.5;
+    border-right:1px solid rgba(187,187,187,0.5);
+}
+.interestsActive{
+    width:28.5%;
+    color:rgba(0, 0, 0, 1);
+    border-right:1px solid rgba(187,187,187,0.5);
+}
+.create{
+    width:23.25%;
+    opacity: 0.5;
+}
+.createActive{
+    width:23.25%;
+    color:rgba(0, 0, 0, 1)
+}
+.search{
+    /* margin-top: 0.4rem; */
+    width: 9rem;
+    height: 32px;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: rgba(245, 245, 245, 1);
+    border-radius: 1rem;
+    font-size: 0.715rem;
+}
+.searchIcon{
+    margin-left: 0.3rem;
+    width: 16px;
+    height: 16px;
+    background-image: url(../public/search.png); 
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.myHome{
+    height: 41px;
+    min-width: 100px;
+    width:16%;
+    margin-right: 7%;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: flex-end;
+}
+.myProfile{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: flex-end;
+}
+.downArrow:hover{
+    opacity: 0.7;
+    cursor:pointer;
+}
+.reminder:hover{
+    opacity: 0.7;
+    cursor:pointer;
+}
+.moreList{
+    width: 239px;
+    height: 209px;
+    line-height: 20px;
+    border-radius: 0px 900px 900px 0px;
+    background-color: rgba(255, 255, 255, 0.8);
+    color: rgba(16, 16, 16, 1);
+    font-size: 14px;
+    text-align: center;
+    font-family: Roboto;
+    border: 1px solid rgba(255, 255, 255, 1);
+    position: fixed;
+    left: 0;
+    top:300px;
+    z-index: 999;
+    animation: slide-in 0.5s ease-in-out forwards;
+    transform: translateX(-100%);
+}
+.moreListHidden{
+    width: 239px;
+    height: 209px;
+    line-height: 20px;
+    border-radius: 0px 900px 900px 0px;
+    background-color: rgba(255, 255, 255, 0.8);
+    color: rgba(16, 16, 16, 1);
+    font-size: 14px;
+    text-align: center;
+    font-family: Roboto;
+    border: 1px solid rgba(255, 255, 255, 1);
+    position: fixed;
+    left: 0;
+    top:300px;
+    z-index: 999;
+    animation: slide-out 0.5s ease-out forwards;
+    transform: translateX(0%);
+}
+.more{
+    position: absolute;
+    width: 71px;
+    height: 32px;
+    border-radius: 4px 30px 30px 4px;
+    background-color: rgba(0, 0, 0, 1);
+    color: rgba(255, 255, 255, 1);
+    font-size: 16px;
+    text-align: left;
+    box-shadow: 0px 2px 11px 0px rgba(0, 0, 0, 0.4);
+    font-family: Roboto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top:88.5px;
+}
+.moreUnClick{
+    position: fixed;
+    width: 71px;
+    height: 32px;
+    border-radius: 4px 30px 30px 4px;
+    background-color: rgba(0, 0, 0, 1);
+    color: rgba(255, 255, 255, 1);
+    font-size: 16px;
+    text-align: left;
+    box-shadow: 0px 2px 11px 0px rgba(0, 0, 0, 0.4);
+    font-family: Roboto;
+    left: 0;
+    top:388.5px;
+    z-index: 9999;
+    font-family: Roboto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+.moreUnClick{
+    cursor: pointer;
+}
+.atlas{
+    width: 72px;
+    height:33px;
+    position: absolute;
+    top:18px;
+    left: 46px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.atlas,.album,.playlist,.show :hover{
+    cursor:pointer;
+}
+.atlasLogo{
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color:rgba(240,240,240,1);
+    background-image:url(../public/atlas.png);
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    background-size: 22px 22px;
+}
+.atlasLogoActive{
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color:black;
+    background-image:url(../public/atlas1.png);
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    background-size: 22px 22px;
+}
+.album{
+    width: 82px;
+    height:33px;
+    position:absolute;
+    top:56px;
+    left:102px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.albumLogo{
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color:rgba(240,240,240,1);
+    background-image:url(../public/album.png);
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    background-size: 22px 22px;
+}
+.albumLogoActive{
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color:black;
+    background-image:url(../public/album1.png);
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    background-size: 22px 22px;
+}
+.playlist{
+    width: 82px;
+    height:33px;
+    position: absolute;
+    bottom: 56px;
+    left: 102px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.playlistLogo{
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color:rgba(240,240,240,1);
+    background-image:url(../public/playlist.png);
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    background-size: 22px 22px;
+}
+.playlistLogoActive{
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color:black;
+    background-image:url(../public/playlist1.png);
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    background-size: 22px 22px;
+}
+.show{
+    width: 72px;
+    height:33px;
+    position: absolute;
+    bottom: 18px;
+    left: 46px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.showLogo{
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color:rgba(240,240,240,1);
+    background-image:url(../public/show.png);
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    background-size: 22px 22px;
+}
+.showLogoActive{
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color:black;
+    background-image:url(../public/show1.png);
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    background-size: 22px 22px;
+}
+.body1{
+height:335px;
+width:100%;
+background-image: url(../public/homeBg2.png); 
+background-repeat: no-repeat;
+background-position: 0% 0%;
+background-size: cover;
+background-attachment:scroll;
+filter:brightness(0.9);
+opacity: 0.8;
+/* padding:0 3.5714rem; */
+} 
+
+.body2{
+    height: 484px;
+    padding-left: 1.78rem;
+    padding-right: 1.78rem;
+    width:100%;
+    display: flex;
+    flex-flow:row wrap;
+    justify-content: space-between;
+    align-items:flex-start;
+    background-color: rgba(255, 255, 255, 1);
+}
+
+.brochureItem{
+margin-top: 1.86rem;
+margin-left: 1.78rem;
+margin-right: 1.78rem;
+height:15.14rem;
+width:12.14rem;
+/* background: #f1f1f1; */
+}
+.brochureBg{
+width: 12.14rem;
+height: 12.14rem;
+background-image: url(../public/brochureBg.png); 
+background-repeat: no-repeat;
+background-size: cover;
+display: flex;
+justify-content: center;
+align-items: center;
+}
+.playlistBg{
+width: 12.14rem;
+height: 12.14rem;
+background-image: url(../public/playlistBg.jpg); 
+background-repeat: no-repeat;
+background-size: cover;
+display: flex;
+justify-content: center;
+align-items: center;
+}
+.brochureContral{
+display: flex;
+flex-flow: row nowrap;
+width: 7rem;
+height: 3rem;
+justify-content: flex-end;
+align-items: center;
+}
+.brochureContralView{
+width: 1rem;
+height: 1rem;
+background-image: url(../public/view.png); 
+background-repeat: no-repeat;
+background-size: cover;
+margin: 0 0.3rem;
+}
+.brochureContralDel{
+width: 1rem;
+height: 1rem;
+background-image: url(../public/delete.png); 
+background-repeat: no-repeat;
+background-size: cover;
+margin: 0 0.3rem;
+}
+.brochureContralDel:hover{
+opacity: 0.7;
+cursor:pointer;
+}
+.brochureContralEdit{
+width: 1rem;
+height: 1rem;
+background-image: url(../public/edit.png); 
+background-repeat: no-repeat;
+background-size: cover;
+margin: 0 0.3rem;
+}
+.brochureContralEdit:hover{
+opacity: 0.7;
+cursor:pointer;
+}
+/* .brochureMedia{
+position: absolute;
+height: 1.25rem;
+width: 7.32rem;
+left: 2.35rem;
+top: 1.4rem;
+display: flex;
+flex-flow: row nowrap;
+justify-content: space-evenly;
+align-items: center;
+padding: 0 0.3rem;
+} */
+.brochureMediaShare{
+width: 1rem;
+height: 1rem;
+background-image: url(../public/share.png); 
+background-repeat: no-repeat;
+background-size: cover;
+margin: 0 0.3rem;
+}
+.brochureImg{
+width: 50%;
+height: 50%;
+border: 1px solid white;
+object-fit: cover;
+-webkit-user-drag: none;
+}
+.brochureMusic{
+width: 50%;
+height: 50%;
+border: 1px solid white;
+object-fit: cover;
+-webkit-user-drag: none;
+animation: rotate 5s linear infinite;
+border-radius: 50%;
+border: none;
+}
+.playlistBone{
+    background-image: url(../public/playlistBone.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 4.176rem;
+    height: 4.626rem;
+    position: absolute;
+    top: 2rem;
+    left: 3rem;
+    rotate: 15deg;
+}
+.brochureImg:hover{
+cursor:pointer;
+filter:brightness(0.8)
+}
+.brochureArea{
+width: 100%;
+height: 3rem;
+overflow: hidden;
+font-size: 0.64rem;
+font-family: SourceHanSansSC-regular;
+display: flex;
+flex-flow:row nowrap;
+justify-content: space-between;
+align-items: center;
+}
+@media screen and (max-width:600px){
+    .header{
+        height: 60px;
+    }
+    .logo_LensView{
+        margin-left: 2%;
+    }
+    .myHome{
+        margin-right: 2%;
+    }
+    .body1{
+        height: 177px;
+    }
+    .options{
+        display: none;
+    }
+    .body2{
+        padding-left: 1.78rem;
+        padding-right: 1.78rem;
+        width:100%;
+        display: flex;
+        flex-flow:row wrap;
+        justify-content: space-between;
+        align-items:center;
+        background-color: rgba(255, 255, 255, 1);
+    }
+    .brochureItem{
+        width: 9rem;
+        height: 11.4rem;
+        margin-right: 0;
+        margin-left: 0;
+    }
+    .brochureBg{
+        width: 9rem;
+        height: 9rem;
+    }
+    .playlistBg{
+        width: 9rem;
+        height: 9rem;
+    }
+    .moreList{
+        transform:scale(0.7);
+        transform-origin: 0 50%;
+        animation: slide-in-phone 0.5s ease-in-out forwards;
+    }
+    .moreListHidden{
+        transform:scale(0.7);
+        transform-origin: 0 50%;
+        animation: slide-out-phone 0.5s ease-out forwards;
+    }
+    .moreUnClick{
+        transform:scale(0.7);
+        transform-origin: 0 50%;
+    }
+  }
+  @keyframes rotate {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  @keyframes slide-in {
+    0% {
+      opacity: 0;
+      transform: translateX(-100%);
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  @keyframes slide-in-phone{
+    0% {
+        opacity: 0;
+        transform: translateX(-100%) scale(0.7);
+      }
+      100% {
+        opacity: 1;
+        transform: translateX(0) scale(0.7);
+      }
+  }
+  @keyframes slide-out {
+    0% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    100% {
+      opacity: 0;
+      transform: translateX(-100%);
+    }
+  }
+  @keyframes slide-out-phone{
+    0% {
+        opacity: 1;
+        transform: translateX(0) scale(0.7);
+      }
+      100% {
+        opacity: 0;
+        transform: translateX(-100%) scale(0.7);
+      }
+  } 
