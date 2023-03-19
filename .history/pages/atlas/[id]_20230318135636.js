@@ -9,8 +9,8 @@ export default function Brochure({data,id}) {
   const [loadingFlag,setLoadingFlag] = useState(false)
   const [myProfile,setMyProfile] =useState({})
   const [brochure,setBrochure] =useState({brochure:[],brochureTag:[],brochureName:null,category:'',likes:0,bgImg:'',content:'',slots:{},id:''})
-  const [videoLargeSiz,setVideoLargeSize] =useState('')
-  const [videoLargeFlag,setVideoLargeFlag] =useState(false)
+  const [imgLargeSiz,setImgLargeSize] =useState('')
+  const [imgLargeFlag,setImgLargeFlag] =useState(false)
 
 
   /***第一步配置rem */
@@ -37,7 +37,7 @@ export default function Brochure({data,id}) {
       tempobj.avatarUrl= data.data[0].avatarUrl
       setMyProfile(tempobj)
       let getdata = JSON.parse(data.data[0].data) ||[]
-      let brochures =getdata.videoLists
+      let brochures =getdata.brochures
       console.log(brochures)
       let tempbrochure = null
       for(let i=0; i<brochures.length; i++){
@@ -107,7 +107,7 @@ export default function Brochure({data,id}) {
         </div>
         <div className={styles.h_menu}>
           <div className={styles.div_atlas}>
-            <div className={styles.info_atlas}>VideoList</div>
+            <div className={styles.info_atlas}>Atlas</div>
           </div>
           <div style={{width:'1px',height:'16px',background:'rgba(187, 187, 187, 1)',marginLeft:'0.6rem',marginRight:'0.6rem'}}></div>
           <div className={styles.div_brochureName}>
@@ -115,15 +115,15 @@ export default function Brochure({data,id}) {
           </div>
         </div>
       </div>
-      <div className={styles.body1Movie}>
+      <div className={styles.body1}>
         <div className={styles.body1Contanier}>
           <div className={styles.body1Info}>
-            <div className={styles.movieFrame}>
-              {brochure.brochure[0]&&<img  src={brochure.brochure[0].cover}></img>}
+            <div className={styles.photoFrame}>
+              {brochure.brochure[0]&&<img  src={brochure.brochure[0].src}></img>}
             </div>
             <div className={styles.brochureInfo}>
-              <div title={brochure.brochureName} style={{width:'100%',height:'1.9286rem',lineHeight:'1.9286rem',color:'rgba(255,255,255,1)',fontFamily:'PingFangSC-regular',fontSize:'1.286rem',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{brochure.brochureName}</div>
-              <div title={myProfile.name} className={styles.authorProfile} style={{width:'100%',height:'1.786rem',}}><img style={{width:'1.7rem',height:'1.7rem',overflow:'hidden',borderRadius:'0.85rem',border:'1px solid #f1f1f1'}} src={myProfile.avatarUrl} alt={'当前网络不可用'} /><span>{myProfile.name}</span>
+              <div style={{width:'100%',height:'1.9286rem',lineHeight:'1.9286rem',color:'rgba(255,255,255,1)',fontFamily:'PingFangSC-regular',fontSize:'1.286rem'}}>{brochure.brochureName}</div>
+              <div className={styles.authorProfile} style={{width:'100%',height:'1.786rem',}}><img style={{width:'1.7rem',height:'1.7rem',overflow:'hidden',borderRadius:'0.85rem',border:'1px solid #f1f1f1'}} src={myProfile.avatarUrl} alt={'当前网络不可用'} /><span>{myProfile.name}</span>
                 <div className={styles.goToMyProfile}>
                 <a target="_blank" href={'https://lenster.xyz/u/'+myProfile.name}></a>
                 </div>
@@ -143,17 +143,15 @@ export default function Brochure({data,id}) {
         <div className={styles.picturesStage}>
           {
             brochure &&  brochure.brochure.map((brochurePictureItem,brochurePictureIndex)=>{
-              return <div key={brochurePictureIndex}   className={styles.movieContanier}>
+              return <div key={brochurePictureIndex}   className={styles.imgContanier}>
                 {/* <Image src={brochurePictureItem.src} alt='Loading' width={0} height={0} unoptimized={true} loading="lazy"></Image> */}
                 <img loading='lazy' onClick={(e)=>{
-                  setVideoLargeSize(brochurePictureItem.src)
-                  setVideoLargeFlag(true)
-                }} src={brochurePictureItem.cover}></img>
-                <span title={brochurePictureItem.author}  style={{top:'0%'}}>{brochurePictureItem.author}</span>
-                <span title={brochurePictureItem.name}  style={{bottom:'0%'}}>{brochurePictureItem.name}</span>
-                <div style={{bottom:'2rem'}} className={styles.goToLensBg}>
+                  setImgLargeSize(brochurePictureItem.src)
+                  setImgLargeFlag(true)
+                }} src={brochurePictureItem.src}></img>
+                <div className={styles.goToLensBg}>
                 </div>
-                <div style={{bottom:'2.215rem'}} className={styles.goToLens}>
+                <div className={styles.goToLens}>
                   <a target="_blank" href={'https://lenster.xyz/posts/'+brochurePictureItem.id}></a>
                   </div>
               </div>
@@ -161,11 +159,10 @@ export default function Brochure({data,id}) {
           }
         </div>
       </div>
-      {videoLargeFlag &&<div onClick={(e)=>{
-        console.log('clicked')
-        setVideoLargeFlag(false)
-      }} style={{position:'fixed',width:'96%',height:'96%',left:'2%',top:'2%',background:'rgba(0,0,0,0.3)' ,display:'flex',flexFlow:'row nowarp',justifyContent:'center',alignItems:'center',filter:'drop-shadow(2px 4px 6px black)'}}>
-                        <video controls style={{width:'80%',height:'80%'}} src={videoLargeSiz}></video>  
+      {imgLargeFlag &&<div onClick={(e)=>{
+        setImgLargeFlag(false)
+      }} style={{position:'fixed',width:'96%',height:'96%',left:'2%',top:'2%',textAlign:'center',filter:'drop-shadow(2px 4px 6px black)'}}>
+                        <img style={{width:'100%',height:'100%',objectFit:'contain'}} src={imgLargeSiz}></img>  
                       </div>}
     </div>
   ) 

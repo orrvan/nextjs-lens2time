@@ -122,7 +122,7 @@ export default function Brochure({data,id}) {
               {brochure.brochure[0]&&<img  src={brochure.brochure[0].cover}></img>}
             </div>
             <div className={styles.brochureInfo}>
-              <div title={brochure.brochureName} style={{width:'100%',height:'1.9286rem',lineHeight:'1.9286rem',color:'rgba(255,255,255,1)',fontFamily:'PingFangSC-regular',fontSize:'1.286rem',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{brochure.brochureName}</div>
+              <div style={{width:'100%',height:'1.9286rem',lineHeight:'1.9286rem',color:'rgba(255,255,255,1)',fontFamily:'PingFangSC-regular',fontSize:'1.286rem',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{brochure.brochureName}</div>
               <div title={myProfile.name} className={styles.authorProfile} style={{width:'100%',height:'1.786rem',}}><img style={{width:'1.7rem',height:'1.7rem',overflow:'hidden',borderRadius:'0.85rem',border:'1px solid #f1f1f1'}} src={myProfile.avatarUrl} alt={'当前网络不可用'} /><span>{myProfile.name}</span>
                 <div className={styles.goToMyProfile}>
                 <a target="_blank" href={'https://lenster.xyz/u/'+myProfile.name}></a>
