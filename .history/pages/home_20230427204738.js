@@ -889,7 +889,7 @@ function AddCollectionComponent({addCollectionComponentProps}){
     dataCreateBrochure.current.content =''
     dataCreateBrochure.current.views =0
     dataCreateBrochure.current.slots={}
-    const regexStr =/[\dA-Za-z\s~!@#$%^&*()_+`\-=\[\]\\{}|;':",.\/<>?]/g
+    const regexStr =/^[\u4e00-\u9fa5_a-zA-Z0-9]+$/
     if(dataCreateBrochure.current.brochureName && regexStr.test(dataCreateBrochure.current.brochureName)){
       console.log('册子名字没啥问题')
     }else{
@@ -954,7 +954,7 @@ function AddCollectionComponent({addCollectionComponentProps}){
     let index = addCollectionComponentProps.brochureSelected.current.index
     dataCreateBrochure.current.brochure = [].concat(brochure)
     // console.log(dataCreateBrochure)
-    const regexStr =/[\dA-Za-z\s~!@#$%^&*()_+`\-=\[\]\\{}|;':",.\/<>?]/g
+    const regexStr =/^[\u4e00-\u9fa5_a-zA-Z0-9]+$/
     if(dataCreateBrochure.current.brochureName && regexStr.test(dataCreateBrochure.current.brochureName)){
       console.log('册子名字没啥问题')
     }else{
@@ -1733,7 +1733,7 @@ function AddCollectionComponentMusic({addCollectionComponentMusicProps}){
     dataCreateBrochure.current.content =''
     dataCreateBrochure.current.views =0
     dataCreateBrochure.current.slots={}
-    const regexStr =/[\dA-Za-z\s~!@#$%^&*()_+`\-=\[\]\\{}|;':",.\/<>?]/g
+    const regexStr =/^[\u4e00-\u9fa5_a-zA-Z0-9]+$/
     if(dataCreateBrochure.current.brochureName && regexStr.test(dataCreateBrochure.current.brochureName)){
       console.log('册子名字没啥问题')
     }else{
@@ -1800,7 +1800,7 @@ function AddCollectionComponentMusic({addCollectionComponentMusicProps}){
     let index = addCollectionComponentMusicProps.brochureSelectedMusic.current.index
     dataCreateBrochure.current.brochure = [].concat(brochure)
     // console.log(dataCreateBrochure)
-    const regexStr =/[\dA-Za-z\s~!@#$%^&*()_+`\-=\[\]\\{}|;':",.\/<>?]/g
+    const regexStr =/^[\u4e00-\u9fa5_a-zA-Z0-9]+$/
     if(dataCreateBrochure.current.brochureName && regexStr.test(dataCreateBrochure.current.brochureName)){
       console.log('册子名字没啥问题')
     }else{
@@ -2591,7 +2591,7 @@ function AddCollectionComponentMovie({addCollectionComponentMovieProps}){
     dataCreateBrochure.current.content =''
     dataCreateBrochure.current.views =0
     dataCreateBrochure.current.slots={}
-    const regexStr =/[\dA-Za-z\s~!@#$%^&*()_+`\-=\[\]\\{}|;':",.\/<>?]/g
+    const regexStr =/^[\u4e00-\u9fa5_a-zA-Z0-9]+$/
     if(dataCreateBrochure.current.brochureName && regexStr.test(dataCreateBrochure.current.brochureName)){
       console.log('册子名字没啥问题')
     }else{
@@ -2657,7 +2657,7 @@ function AddCollectionComponentMovie({addCollectionComponentMovieProps}){
     let index = addCollectionComponentMovieProps.brochureSelectedMovie.current.index
     dataCreateBrochure.current.brochure = [].concat(brochure)
     // console.log(dataCreateBrochure)
-    const regexStr =/[\dA-Za-z\s~!@#$%^&*()_+`\-=\[\]\\{}|;':",.\/<>?]/g
+    const regexStr =/^[\u4e00-\u9fa5_a-zA-Z0-9]+$/
 
     if(dataCreateBrochure.current.brochureName && regexStr.test(dataCreateBrochure.current.brochureName)){
       console.log('册子名字没啥问题')

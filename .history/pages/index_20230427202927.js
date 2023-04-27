@@ -171,6 +171,8 @@ export default function Home({data}) {
         <div className={styles.downArrow1}></div>
         </div>}
       </div> */}
+      <div>
+    </div>
 
       <div className={styles.myHome}>
       <Link  className={styles.h_login} target='_blank' href={`https://lenster.xyz/u/orrvan2`}>Contact</Link>

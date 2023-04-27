@@ -164,16 +164,17 @@ export default function Home({data}) {
     </Head>
     <div className={styles.header}>
       <div className={styles.logo_LensView}>Lensview</div>
-      {/* <div className={styles.options}>
+      <div className={styles.options}>
         {<div className={clickIndexFlag[0] ? styles.recommendationActive : styles.recommendation} style={{}}>Recommendation</div>} 
         {<div className={clickIndexFlag[1] ? styles.interestsActive : styles.interests}  style={{}}>Interests</div>}        
         {<div className={clickIndexFlag[2] ? styles.createActive : styles.create}  style={{}}>Create
         <div className={styles.downArrow1}></div>
         </div>}
-      </div> */}
+      </div>
+      <div></div>
 
       <div className={styles.myHome}>
-      <Link  className={styles.h_login} target='_blank' href={`https://lenster.xyz/u/orrvan2`}>Contact</Link>
+      <div className={styles.h_login}>concat orrvan2.lens</div>
       { /* if the user has not yet connected their wallet, show a connect button */ }
       {/* {
         !address && <div onClick={connect} className={styles.h_login}>Connect</div>

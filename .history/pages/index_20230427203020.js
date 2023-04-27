@@ -162,15 +162,17 @@ export default function Home({data}) {
   {/* <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
   <link rel="manifest" href="/manifest.json" /> */}
     </Head>
-    <div className={styles.header}>
+    {/* <div className={styles.header}>
       <div className={styles.logo_LensView}>Lensview</div>
-      {/* <div className={styles.options}>
+      <div className={styles.options}>
         {<div className={clickIndexFlag[0] ? styles.recommendationActive : styles.recommendation} style={{}}>Recommendation</div>} 
         {<div className={clickIndexFlag[1] ? styles.interestsActive : styles.interests}  style={{}}>Interests</div>}        
         {<div className={clickIndexFlag[2] ? styles.createActive : styles.create}  style={{}}>Create
         <div className={styles.downArrow1}></div>
         </div>}
-      </div> */}
+      </div>
+      <div>
+    </div> */}
 
       <div className={styles.myHome}>
       <Link  className={styles.h_login} target='_blank' href={`https://lenster.xyz/u/orrvan2`}>Contact</Link>

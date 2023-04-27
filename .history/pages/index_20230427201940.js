@@ -164,26 +164,29 @@ export default function Home({data}) {
     </Head>
     <div className={styles.header}>
       <div className={styles.logo_LensView}>Lensview</div>
-      {/* <div className={styles.options}>
+      <div className={styles.options}>
         {<div className={clickIndexFlag[0] ? styles.recommendationActive : styles.recommendation} style={{}}>Recommendation</div>} 
         {<div className={clickIndexFlag[1] ? styles.interestsActive : styles.interests}  style={{}}>Interests</div>}        
         {<div className={clickIndexFlag[2] ? styles.createActive : styles.create}  style={{}}>Create
         <div className={styles.downArrow1}></div>
         </div>}
+      </div>
+      <div></div>
+      {/* <div className={styles.search}>
+        <div className={styles.searchIcon}></div>
+        <input style={{border:'none',backgroundColor:'rgba(245, 245, 245, 1)',height:'32px',outline:'none',width:'80%'}}></input>
       </div> */}
-
       <div className={styles.myHome}>
-      <Link  className={styles.h_login} target='_blank' href={`https://lenster.xyz/u/orrvan2`}>Contact</Link>
       { /* if the user has not yet connected their wallet, show a connect button */ }
-      {/* {
+      {
         !address && <div onClick={connect} className={styles.h_login}>Connect</div>
-      } */}
+      }
       { /* if the user has connected their wallet but has not yet authenticated, show them a login button */ }
-      {/* {
+      {
         address && !token && <div onClick={login} className={styles.h_login}>Login</div>
-      } */}
+      }
       { /* once the user has authenticated, show them a success message */ }
-      {/* {
+      {
         address && token && myProfile && <div className={styles.myProfile}>
         <div className={styles.reminder}></div> 
         <div className={styles.h_avatarUrl}>
@@ -191,7 +194,16 @@ export default function Home({data}) {
         </div> 
         <div className={styles.downArrow}></div>
         </div>
-      } */}
+      }
+
+        {/* <Link style={{display:'block',width:'100%',color:'white',fontSize:'0.6rem',lineHeight:'41px'}}  target="_blank"  href={`/home`}> I have a lens handle </Link> */}
+        {/* <div className={styles.remind}></div>
+        {
+        address && token && headerProps.myProfile && <div className={styles.h_avatarUrl}>
+          <img src={ headerProps.myProfile.avatarUrl} alt={'当前网络不可用'} />
+        </div>
+        }
+        <div className={styles.myHomeBtn}></div> */}
       </div>
     </div>
     {<div className={styles.moreUnClick} onClick={switchMore}><span>More</span></div>}
